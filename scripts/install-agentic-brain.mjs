@@ -6,6 +6,7 @@ import {
   collectAwesomeCatalog,
   curateRequiredAssets,
   chooseProfileFromSignals,
+  toYaml,
   walkFiles,
   relUnix
 } from "./lib/catalog-utils.mjs";
@@ -74,25 +75,52 @@ function copyCoreAwesomeSubset(sourceRoot, vendorTarget) {
   }
 }
 
+function sanitizeTsvField(value) {
+  return String(value ?? "")
+    .replace(/[\r\n]+/g, " ")
+    .replace(/\t+/g, " ")
+    .trim();
+}
+
+function ensureTsvHeader(filePath, header) {
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, `${header}\n`);
+    return;
+  }
+
+  const content = fs.readFileSync(filePath, "utf8");
+  if (!content.trim()) {
+    fs.writeFileSync(filePath, `${header}\n`);
+    return;
+  }
+
+  const firstLine = content.split(/\r?\n/, 1)[0];
+  if (firstLine !== header) {
+    throw new Error(`Invalid TSV header in ${filePath}`);
+  }
+}
+
+function appendTsvRow(filePath, values) {
+  const row = values.map(sanitizeTsvField).join("\t");
+  const content = fs.existsSync(filePath) ? fs.readFileSync(filePath, "utf8") : "";
+  const prefix = !content || content.endsWith("\n") ? "" : "\n";
+  fs.appendFileSync(filePath, `${prefix}${row}\n`);
+}
+
 function appendMemoryInstallEntry(memoryRoot, profile, selectedCount) {
-  const actionsPath = path.join(memoryRoot, "03_actions.md");
+  const actionsPath = path.join(memoryRoot, "03_actions.tsv");
   const now = new Date();
   const stamp = now.toISOString();
-  const id = `ACT-${stamp.slice(0, 10).replace(/-/g, "")}-INSTALL`;
+  const header = "Timestamp\tAgent_Phase\tAction_Summary\tFiles_Changed\tLinked_Decision_Node";
+  ensureTsvHeader(actionsPath, header);
 
-  const entry = [
-    "",
-    `- **ID:** ${id}`,
-    `- **Timestamp:** ${stamp}`,
-    "- **Agent:** installer",
-    "- **Phase:** INSTALL",
-    `- **Summary:** Installed Agentic Brain with core awesome-copilot subset and generated curated required assets for profile '${profile}'.`,
-    "- **Artifacts:** .github/agentic_brain/vendor/awesome-copilot/{agents,instructions,skills,hooks,workflows,plugins}, .github/agentic_brain/catalog/awesome-catalog.json, .github/agentic_brain/catalog/required-assets.json",
-    `- **Validation:** selected assets ${selectedCount}`,
-    "- **Related:** [Memory Graph Contract](./01_decisions.md#memory-graph-contract)"
-  ].join("\n");
-
-  fs.appendFileSync(actionsPath, entry + "\n");
+  appendTsvRow(actionsPath, [
+    stamp,
+    "installer:INSTALL",
+    `Installed Agentic Brain with core awesome-copilot subset for profile '${profile}' and selected ${selectedCount} required assets.`,
+    ".github/agentic_brain/vendor/awesome-copilot/{agents,instructions,skills,hooks,workflows,plugins};.github/agentic_brain/catalog/awesome-catalog.yaml;.github/agentic_brain/catalog/required-assets.yaml",
+    "01_decisions.md#memory-graph-contract"
+  ]);
 }
 
 function appendDecisionEntry(memoryRoot, profile) {
@@ -163,11 +191,11 @@ const required = curateRequiredAssets(catalog, profile);
 const catalogDir = path.join(githubTarget, "agentic_brain", "catalog");
 ensureDir(catalogDir);
 
-const catalogPath = path.join(catalogDir, "awesome-catalog.json");
-fs.writeFileSync(catalogPath, JSON.stringify(catalog, null, 2));
+const catalogPath = path.join(catalogDir, "awesome-catalog.yaml");
+fs.writeFileSync(catalogPath, `${toYaml(catalog)}\n`);
 
-const requiredPath = path.join(catalogDir, "required-assets.json");
-fs.writeFileSync(requiredPath, JSON.stringify(required, null, 2));
+const requiredPath = path.join(catalogDir, "required-assets.yaml");
+fs.writeFileSync(requiredPath, `${toYaml(required)}\n`);
 
 const memoryRoot = path.join(githubTarget, "agent_memory");
 ensureDir(memoryRoot);

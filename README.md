@@ -70,8 +70,8 @@ The installer writes:
 - target `.github/` from `.github_templates/`.
 - target `AGENTS/` from `AGENTS_templates/`.
 - target `.github/agentic_brain/vendor/awesome-copilot/` (core subset only).
-- target `.github/agentic_brain/catalog/awesome-catalog.json` (index).
-- target `.github/agentic_brain/catalog/required-assets.json` (curated required set).
+- target `.github/agentic_brain/catalog/awesome-catalog.yaml` (index).
+- target `.github/agentic_brain/catalog/required-assets.yaml` (curated required set).
 - target `.github/agent_memory/` append-only memory graph and install logs.
 
 ## Persistent Memory Contract
@@ -80,9 +80,9 @@ Memory is repository-local and append-only by default:
 - `00_index.md`: graph index and reference map.
 - `01_decisions.md`: immutable decision ledger.
 - `02_learnings.md`: learnings and patterns.
-- `03_actions.md`: chronological action log.
+- `03_actions.tsv`: chronological action telemetry ledger.
 - `04_blockers.md`: active/resolved blockers.
-- `05_handoffs.log`: append-only structured handoff entries.
+- `05_handoffs.tsv`: append-only handoff telemetry ledger.
 - `06_memory_health.md`: periodic health and link checks.
 
 Every phase checklist entry must link to memory evidence entries.

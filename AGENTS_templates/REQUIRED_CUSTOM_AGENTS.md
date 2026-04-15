@@ -5,7 +5,7 @@ This is the mandatory custom-agent set for delivering the project end to end.
 No optional agents should be included here.
 
 This file is generated/updated from:
-- `.github/agentic_brain/catalog/required-assets.json`
+- `.github/agentic_brain/catalog/required-assets.yaml`
 - repository profile detection (`frontend`, `backend`, `fullstack`, `data`, `infra`)
 
 ## How To Use This File

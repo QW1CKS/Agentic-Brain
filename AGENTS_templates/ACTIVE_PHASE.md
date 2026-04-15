@@ -30,14 +30,14 @@
 - Build: <pending | pass | fail> (<command used>)
 - Test: <pending | pass | fail> (<command used>)
 - Lint: <pending | pass | fail> (<command used>)
-- Evidence Link: <relative link to 03_actions.md entry>
+- Evidence Link: <row key in .github/agent_memory/03_actions.tsv>
 
 ## Blockers
 - None active | <Describe active blockers here>
 
 ## Handoff Contract
-- Last Handoff ID: <HO-YYYYMMDD-XXX>
-- Handoff Log Entry: <relative link to .github/agent_memory/05_handoffs.log>
+- Last Handoff Row: <timestamp + from_agent + to_agent row key>
+- Handoff Log Entry: <row key in .github/agent_memory/05_handoffs.tsv>
 - Next Handoff Trigger: <what must be true before ownership moves>
 
 ## Last Updated

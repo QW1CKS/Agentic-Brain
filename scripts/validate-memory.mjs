@@ -47,25 +47,89 @@ function collectIds(markdown) {
   return ids;
 }
 
+function validateTsv(filePath, expectedHeader, label) {
+  const errors = [];
+
+  if (!fs.existsSync(filePath)) {
+    errors.push(`${label}: missing file`);
+    return { errors, lineCount: 0 };
+  }
+
+  const content = fs.readFileSync(filePath, "utf8");
+  if (!content.trim()) {
+    errors.push(`${label}: file is empty`);
+    return { errors, lineCount: 0 };
+  }
+
+  const lines = content.split(/\r?\n/).filter((line) => line.length > 0);
+  const expectedColumns = expectedHeader.split("\t").length;
+
+  if (lines[0] !== expectedHeader) {
+    errors.push(`${label}: invalid header`);
+  }
+
+  for (let index = 1; index < lines.length; index += 1) {
+    const line = lines[index];
+    const rowNumber = index + 1;
+
+    if (line.includes("|")) {
+      errors.push(`${label}: row ${rowNumber} contains markdown pipe characters`);
+    }
+
+    if (!line.includes("\t")) {
+      errors.push(`${label}: row ${rowNumber} is not tab-separated`);
+    }
+
+    const columns = line.split("\t");
+    if (columns.length !== expectedColumns) {
+      errors.push(
+        `${label}: row ${rowNumber} has ${columns.length} columns, expected ${expectedColumns}`
+      );
+    }
+  }
+
+  return { errors, lineCount: lines.length };
+}
+
 const args = parseArgs(process.argv);
 const root = path.resolve(args.target || process.cwd());
 const memoryRoot = path.join(root, ".github", "agent_memory");
 
-const files = [
+const markdownFiles = [
   "00_index.md",
   "01_decisions.md",
   "02_learnings.md",
-  "03_actions.md",
   "04_blockers.md",
   "06_memory_health.md"
 ];
 
+const tsvFiles = [
+  {
+    name: "03_actions.tsv",
+    header: "Timestamp\tAgent_Phase\tAction_Summary\tFiles_Changed\tLinked_Decision_Node"
+  },
+  {
+    name: "05_handoffs.tsv",
+    header: "Timestamp\tFrom_Agent\tTo_Agent\tStatus\tNext_Action"
+  }
+];
+
 let brokenLinks = 0;
 let duplicateIds = 0;
+const missingFiles = [];
+const brokenLinkDetails = [];
+const tsvErrors = [];
+const compressionRecommendations = [];
+const tsvLineCounts = {};
 const allIds = [];
 
-for (const name of files) {
+for (const name of markdownFiles) {
   const full = path.join(memoryRoot, name);
+  if (!fs.existsSync(full)) {
+    missingFiles.push(name);
+    continue;
+  }
+
   const content = readIfExists(full);
   if (!content) {
     continue;
@@ -78,10 +142,24 @@ for (const name of files) {
     const target = path.resolve(path.dirname(full), link.split("#")[0]);
     if (!fs.existsSync(target)) {
       brokenLinks += 1;
+      brokenLinkDetails.push({ file: name, link });
     }
   }
 
   allIds.push(...collectIds(content));
+}
+
+for (const tsv of tsvFiles) {
+  const full = path.join(memoryRoot, tsv.name);
+  const result = validateTsv(full, tsv.header, tsv.name);
+  tsvLineCounts[tsv.name] = result.lineCount;
+  tsvErrors.push(...result.errors);
+
+  if (result.lineCount > 100) {
+    compressionRecommendations.push(
+      `${tsv.name} has ${result.lineCount} lines. Propose memory compression for oldest entries.`
+    );
+  }
 }
 
 const seen = new Set();
@@ -96,9 +174,19 @@ const summary = {
   checkedAt: new Date().toISOString(),
   memoryRoot,
   brokenLinks,
+  brokenLinkDetails,
   duplicateIds,
-  filesChecked: files
+  missingFiles,
+  tsvErrors,
+  compressionRecommendations,
+  tsvLineCounts,
+  filesChecked: {
+    markdown: markdownFiles,
+    tsv: tsvFiles.map((item) => item.name)
+  }
 };
 
 console.log(JSON.stringify(summary, null, 2));
-process.exit(brokenLinks > 0 || duplicateIds > 0 ? 1 : 0);
+const hasFailures =
+  brokenLinks > 0 || duplicateIds > 0 || missingFiles.length > 0 || tsvErrors.length > 0;
+process.exit(hasFailures ? 1 : 0);

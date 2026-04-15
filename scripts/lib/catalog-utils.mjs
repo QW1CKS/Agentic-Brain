@@ -81,6 +81,83 @@ export function relUnix(base, filePath) {
   return path.relative(base, filePath).split(path.sep).join("/");
 }
 
+function toYamlScalar(value) {
+  if (value === null || value === undefined) {
+    return "null";
+  }
+  if (typeof value === "number" || typeof value === "boolean") {
+    return String(value);
+  }
+  return JSON.stringify(String(value));
+}
+
+function isObject(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function yamlKey(key) {
+  return /^[A-Za-z0-9_-]+$/.test(key) ? key : JSON.stringify(key);
+}
+
+export function toYaml(value, indent = 0) {
+  const pad = " ".repeat(indent);
+
+  if (Array.isArray(value)) {
+    if (value.length === 0) {
+      return `${pad}[]`;
+    }
+
+    const lines = [];
+    for (const item of value) {
+      if (isObject(item) || Array.isArray(item)) {
+        lines.push(`${pad}-`);
+        lines.push(toYaml(item, indent + 2));
+      } else {
+        lines.push(`${pad}- ${toYamlScalar(item)}`);
+      }
+    }
+    return lines.join("\n");
+  }
+
+  if (isObject(value)) {
+    const entries = Object.entries(value);
+    if (entries.length === 0) {
+      return `${pad}{}`;
+    }
+
+    const lines = [];
+    for (const [key, current] of entries) {
+      const resolvedKey = yamlKey(key);
+
+      if (Array.isArray(current)) {
+        if (current.length === 0) {
+          lines.push(`${pad}${resolvedKey}: []`);
+        } else {
+          lines.push(`${pad}${resolvedKey}:`);
+          lines.push(toYaml(current, indent + 2));
+        }
+        continue;
+      }
+
+      if (isObject(current)) {
+        if (Object.keys(current).length === 0) {
+          lines.push(`${pad}${resolvedKey}: {}`);
+        } else {
+          lines.push(`${pad}${resolvedKey}:`);
+          lines.push(toYaml(current, indent + 2));
+        }
+        continue;
+      }
+
+      lines.push(`${pad}${resolvedKey}: ${toYamlScalar(current)}`);
+    }
+
+    return lines.join("\n");
+  }
+
+  return `${pad}${toYamlScalar(value)}`;
+}
+
 export function inferTagsFromPath(relPath) {
   const lower = relPath.toLowerCase();
   const tags = [];

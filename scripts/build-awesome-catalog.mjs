@@ -5,6 +5,7 @@ import {
   collectAwesomeCatalog,
   curateRequiredAssets,
   chooseProfileFromSignals,
+  toYaml,
   walkFiles
 } from "./lib/catalog-utils.mjs";
 
@@ -47,14 +48,14 @@ if (!fs.existsSync(awesomeRoot)) {
 ensureDir(outDir);
 
 const catalog = collectAwesomeCatalog(awesomeRoot);
-const catalogPath = path.join(outDir, "awesome-catalog.json");
-fs.writeFileSync(catalogPath, JSON.stringify(catalog, null, 2));
+const catalogPath = path.join(outDir, "awesome-catalog.yaml");
+fs.writeFileSync(catalogPath, `${toYaml(catalog)}\n`);
 
 const repoFiles = walkFiles(targetRepo);
 const resolvedProfile = profile === "auto" ? chooseProfileFromSignals(repoFiles) : profile;
 const required = curateRequiredAssets(catalog, resolvedProfile);
-const requiredPath = path.join(outDir, "required-assets.json");
-fs.writeFileSync(requiredPath, JSON.stringify(required, null, 2));
+const requiredPath = path.join(outDir, "required-assets.yaml");
+fs.writeFileSync(requiredPath, `${toYaml(required)}\n`);
 
 console.log(`Catalog built: ${catalogPath}`);
 console.log(`Required set built: ${requiredPath}`);

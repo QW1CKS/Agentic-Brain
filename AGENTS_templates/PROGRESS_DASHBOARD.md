@@ -18,7 +18,7 @@
 | Core Hooks Imported | <pending|complete> | <0> | Source: .github/agentic_brain/vendor/awesome-copilot/hooks |
 | Core Workflows Imported | <pending|complete> | <0> | Source: .github/agentic_brain/vendor/awesome-copilot/workflows |
 | Core Plugins Imported | <pending|complete> | <0> | Source: .github/agentic_brain/vendor/awesome-copilot/plugins |
-| Required Assets Curated | <pending|complete> | <0> | Output: .github/agentic_brain/catalog/required-assets.json (from core subset) |
+| Required Assets Curated | <pending|complete> | <0> | Output: .github/agentic_brain/catalog/required-assets.yaml (from core subset) |
 
 ## Memory Health
 

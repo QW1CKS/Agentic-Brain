@@ -72,7 +72,7 @@
 - Each phase must define:
   - required artifacts,
   - verification commands,
-  - evidence links into `.github/agent_memory/03_actions.md`.
+  - evidence row keys into `.github/agent_memory/03_actions.tsv`.
 
 ## 7. Awesome-Copilot Curation Inputs
 - **Import Mode:** `<install-everything | curated-only | hybrid>`

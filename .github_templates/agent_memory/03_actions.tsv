@@ -1,0 +1,2 @@
+Timestamp	Agent_Phase	Action_Summary	Files_Changed	Linked_Decision_Node
+2026-04-16T00:00:00Z	INSTALL	Initialized Agentic Brain memory graph and imported awesome-copilot core subset.	.github/agent_memory/*;.github/agentic_brain/vendor/awesome-copilot/*;.github/agentic_brain/catalog/*	01_decisions.md#memory-graph-contract
