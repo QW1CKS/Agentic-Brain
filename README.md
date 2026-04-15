@@ -8,6 +8,17 @@ It combines:
 - an importable core subset from `awesome-copilot-main`, and
 - an append-only second-brain memory graph (`.github/agent_memory/`).
 
+## Documentation Map
+
+- Installation guide: [INSTALLATION.md](INSTALLATION.md)
+- Product requirements template: [PRD_TEMPLATE.md](PRD_TEMPLATE.md)
+- Universal execution protocol: [prompt.md](prompt.md)
+- Copilot workflow contract template: [.github_templates/copilot-instructions.md](.github_templates/copilot-instructions.md)
+- Active phase state template: [AGENTS_templates/ACTIVE_PHASE.md](AGENTS_templates/ACTIVE_PHASE.md)
+- Progress dashboard template: [AGENTS_templates/PROGRESS_DASHBOARD.md](AGENTS_templates/PROGRESS_DASHBOARD.md)
+- Phase README template: [AGENTS_templates/PHASE_TEMPLATE/README.md](AGENTS_templates/PHASE_TEMPLATE/README.md)
+- Phase checklist template: [AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md](AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md)
+
 ## What This Template Does
 
 When a user asks Copilot to install Agentic Brain in any repository, the installer flow will:

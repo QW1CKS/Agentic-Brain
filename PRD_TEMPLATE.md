@@ -1,5 +1,16 @@
 # Product Requirements Document (PRD)
 
+## Related Docs
+
+- Overview: [README.md](README.md)
+- Installation guide: [INSTALLATION.md](INSTALLATION.md)
+- Universal execution protocol: [prompt.md](prompt.md)
+- Copilot workflow contract template: [.github_templates/copilot-instructions.md](.github_templates/copilot-instructions.md)
+- Active phase state template: [AGENTS_templates/ACTIVE_PHASE.md](AGENTS_templates/ACTIVE_PHASE.md)
+- Progress dashboard template: [AGENTS_templates/PROGRESS_DASHBOARD.md](AGENTS_templates/PROGRESS_DASHBOARD.md)
+- Phase README template: [AGENTS_templates/PHASE_TEMPLATE/README.md](AGENTS_templates/PHASE_TEMPLATE/README.md)
+- Phase checklist template: [AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md](AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md)
+
 ## 1. Project Overview
 - **Name:** `<Project Name>`
 - **Description:** `<One paragraph elevator pitch of what this product solves and what it is>`
@@ -85,3 +96,5 @@
 - **Log Strategy:** `append-only`
 - **Retention:** `<archive policy, e.g. quarterly snapshots>`
 - **Linking Rule:** `every checklist completion must reference at least one memory entry`
+
+Return to overview: [README.md](README.md)

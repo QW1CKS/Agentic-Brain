@@ -2,6 +2,17 @@
 
 These instructions define how Copilot agents should operate for this repository under an Agentic Workflow framework.
 
+## Documentation Links
+
+- Overview: [../README.md](../README.md)
+- Installation guide: [../INSTALLATION.md](../INSTALLATION.md)
+- Product requirements template: [../PRD_TEMPLATE.md](../PRD_TEMPLATE.md)
+- Universal execution protocol: [../prompt.md](../prompt.md)
+- Active phase state template: [../AGENTS_templates/ACTIVE_PHASE.md](../AGENTS_templates/ACTIVE_PHASE.md)
+- Progress dashboard template: [../AGENTS_templates/PROGRESS_DASHBOARD.md](../AGENTS_templates/PROGRESS_DASHBOARD.md)
+- Phase README template: [../AGENTS_templates/PHASE_TEMPLATE/README.md](../AGENTS_templates/PHASE_TEMPLATE/README.md)
+- Phase checklist template: [../AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md](../AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md)
+
 ## Primary Operating Mode
 
 - Execute strictly using a phase-driven workflow governed by `AGENTS/ACTIVE_PHASE.md`.

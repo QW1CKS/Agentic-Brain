@@ -1,5 +1,16 @@
 # Agentic Brain Installation Guide
 
+## Related Docs
+
+- Overview: [README.md](README.md)
+- Product requirements template: [PRD_TEMPLATE.md](PRD_TEMPLATE.md)
+- Universal execution protocol: [prompt.md](prompt.md)
+- Copilot workflow contract template: [.github_templates/copilot-instructions.md](.github_templates/copilot-instructions.md)
+- Active phase state template: [AGENTS_templates/ACTIVE_PHASE.md](AGENTS_templates/ACTIVE_PHASE.md)
+- Progress dashboard template: [AGENTS_templates/PROGRESS_DASHBOARD.md](AGENTS_templates/PROGRESS_DASHBOARD.md)
+- Phase README template: [AGENTS_templates/PHASE_TEMPLATE/README.md](AGENTS_templates/PHASE_TEMPLATE/README.md)
+- Phase checklist template: [AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md](AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md)
+
 ## Copilot Chat Install
 
 In a target repository, ask Copilot:
@@ -41,3 +52,5 @@ npm run memory:validate -- --target "C:\path\to\repo"
 - `.github/agent_memory/00_index.md`
 - `.github/agent_memory/03_actions.tsv`
 - `.github/agent_memory/05_handoffs.tsv`
+
+Return to overview: [README.md](README.md)

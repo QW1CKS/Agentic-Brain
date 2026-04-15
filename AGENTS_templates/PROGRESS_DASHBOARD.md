@@ -1,5 +1,16 @@
 # <Project Name> Progress Dashboard
 
+## Related Docs
+
+- Overview: [../README.md](../README.md)
+- Installation guide: [../INSTALLATION.md](../INSTALLATION.md)
+- Product requirements template: [../PRD_TEMPLATE.md](../PRD_TEMPLATE.md)
+- Universal execution protocol: [../prompt.md](../prompt.md)
+- Copilot workflow contract template: [../.github_templates/copilot-instructions.md](../.github_templates/copilot-instructions.md)
+- Active phase state template: [./ACTIVE_PHASE.md](./ACTIVE_PHASE.md)
+- Phase README template: [./PHASE_TEMPLATE/README.md](./PHASE_TEMPLATE/README.md)
+- Phase checklist template: [./PHASE_TEMPLATE/CHECKLIST.md](./PHASE_TEMPLATE/CHECKLIST.md)
+
 ## Overall Status
 
 | Phase | Status | Completion | Current Owner | Notes |
@@ -33,3 +44,5 @@
 ## Milestone History
 
 - <YYYY-MM-DD>: Repository and Agentic Workflow initialized.
+
+Return to overview: [../README.md](../README.md)

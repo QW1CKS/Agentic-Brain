@@ -1,5 +1,16 @@
 # <Phase Name e.g. Phase 1 - Foundation>
 
+## Related Docs
+
+- Overview: [../../README.md](../../README.md)
+- Installation guide: [../../INSTALLATION.md](../../INSTALLATION.md)
+- Product requirements template: [../../PRD_TEMPLATE.md](../../PRD_TEMPLATE.md)
+- Universal execution protocol: [../../prompt.md](../../prompt.md)
+- Copilot workflow contract template: [../../.github_templates/copilot-instructions.md](../../.github_templates/copilot-instructions.md)
+- Active phase state template: [../ACTIVE_PHASE.md](../ACTIVE_PHASE.md)
+- Progress dashboard template: [../PROGRESS_DASHBOARD.md](../PROGRESS_DASHBOARD.md)
+- Phase checklist template: [./CHECKLIST.md](./CHECKLIST.md)
+
 ## Goal
 <Short description of what needs to be achieved in this phase>
 
@@ -50,3 +61,5 @@
 	- artifact path(s),
 	- verification command result summary,
 	- row reference to `.github/agent_memory/03_actions.tsv`.
+
+Return to overview: [../../README.md](../../README.md)
