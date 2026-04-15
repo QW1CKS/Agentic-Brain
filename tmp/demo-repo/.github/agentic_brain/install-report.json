@@ -1,0 +1,20 @@
+{
+  "installedAt": "2026-04-15T22:12:48.971Z",
+  "mode": "install",
+  "targetRoot": "C:\\Users\\user\\Desktop\\Agentic Brain\\tmp\\demo-repo",
+  "sourceRoot": "C:\\Users\\user\\Desktop\\Agentic Brain\\awesome-copilot-main",
+  "profile": "fullstack",
+  "importedKinds": {
+    "agent": 203,
+    "instruction": 177,
+    "skill": 775,
+    "hook": 22,
+    "workflow": 7,
+    "plugin-external": 1,
+    "plugin": 529
+  },
+  "selectedCount": 256,
+  "excludedCount": 1458,
+  "catalogPath": ".github/agentic_brain/catalog/awesome-catalog.json",
+  "requiredPath": ".github/agentic_brain/catalog/required-assets.json"
+}

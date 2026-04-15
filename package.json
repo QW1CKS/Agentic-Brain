@@ -1,0 +1,11 @@
+{
+  "name": "agentic-brain-template",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Installable, repo-adaptive Agentic Brain template with awesome-copilot ingestion and persistent memory.",
+  "scripts": {
+    "install:brain": "node ./scripts/install-agentic-brain.mjs",
+    "catalog:build": "node ./scripts/build-awesome-catalog.mjs",
+    "memory:validate": "node ./scripts/validate-memory.mjs"
+  }
+}

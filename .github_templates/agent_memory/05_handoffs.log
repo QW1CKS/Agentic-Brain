@@ -1,0 +1,1 @@
+{"id":"HO-YYYYMMDD-XXX","timestamp":"YYYY-MM-DDTHH:MM:SSZ","from_agent":"<path>","to_agent":"<path>","phase":"<PHASE_ID>","summary":"<handoff summary>","evidence":"<relative-link>","blockers":["<BLK-ID>"]}

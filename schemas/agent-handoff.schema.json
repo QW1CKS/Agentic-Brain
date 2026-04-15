@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agentic Brain Handoff Entry",
+  "type": "object",
+  "required": ["id", "timestamp", "from_agent", "to_agent", "phase", "summary"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^HO-[0-9]{8}-[A-Z0-9]+$" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "from_agent": { "type": "string" },
+    "to_agent": { "type": "string" },
+    "phase": { "type": "string" },
+    "summary": { "type": "string" },
+    "evidence": { "type": "string" },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

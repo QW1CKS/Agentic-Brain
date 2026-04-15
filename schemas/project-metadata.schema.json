@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agentic Brain Project Metadata",
+  "type": "object",
+  "required": [
+    "projectName",
+    "repoProfile",
+    "primaryLanguage",
+    "packageManager",
+    "validationCommands"
+  ],
+  "properties": {
+    "projectName": { "type": "string", "minLength": 1 },
+    "repoProfile": {
+      "type": "string",
+      "enum": ["auto", "frontend", "backend", "fullstack", "data", "infra"]
+    },
+    "primaryLanguage": { "type": "string", "minLength": 1 },
+    "frameworks": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "packageManager": { "type": "string", "minLength": 1 },
+    "validationCommands": {
+      "type": "object",
+      "required": ["build", "test", "lint"],
+      "properties": {
+        "build": { "type": "string", "minLength": 1 },
+        "test": { "type": "string", "minLength": 1 },
+        "lint": { "type": "string", "minLength": 1 },
+        "smoke": { "type": "string" }
+      }
+    },
+    "phaseAdaptation": {
+      "type": "object",
+      "properties": {
+        "skipPhases": { "type": "array", "items": { "type": "string" } },
+        "mergePhases": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "type": "string" }
+          }
+        },
+        "customSequence": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
