@@ -1,5 +1,13 @@
 # Active Phase State
 
+**🚨 CRITICAL: Every agent MUST follow these rules — NO EXCEPTIONS**
+
+## Agent Scope Rules
+1. **ONLY do tasks under YOUR agent section** — Do NOT do tasks from other agents' sections
+2. **Load ALL memory files BEFORE any task** — Not optional, MANDATORY
+3. **Write to memory AFTER every action** — Not optional, MANDATORY
+4. **Load copilot-instructions.md FIRST** — Before any other file
+
 ## Related Docs
 
 - Overview: [../README.md](../README.md)
@@ -10,6 +18,49 @@
 - Progress dashboard template: [./PROGRESS_DASHBOARD.md](./PROGRESS_DASHBOARD.md)
 - Phase README template: [./PHASE_TEMPLATE/README.md](./PHASE_TEMPLATE/README.md)
 - Phase checklist template: [./PHASE_TEMPLATE/CHECKLIST.md](./PHASE_TEMPLATE/CHECKLIST.md)
+
+---
+
+## 🚨 MANDATORY PRE-FLIGHT: BEFORE ANY TASK
+
+**You MUST do this BEFORE doing ANY work:**
+
+### Step 1: Load copilot-instructions.md (ALWAYS FIRST)
+```powershell
+cat .github/copilot-instructions.md
+```
+
+### Step 2: Load Memory Files (ALL REQUIRED)
+```powershell
+# Core memory
+cat .github/agent_memory/00_index.md
+cat .github/agent_memory/01_decisions.md
+cat .github/agent_memory/02_learnings.md
+cat .github/agent_memory/03_actions.tsv
+cat .github/agent_memory/04_blockers.md
+cat .github/agent_memory/05_handoffs.tsv
+cat .github/agent_memory/06_memory_health.md
+# Catalogs
+cat .github/agentic_brain/catalog/awesome-catalog.yaml
+cat .github/agentic_brain/catalog/required-assets.yaml
+# Phase docs
+cat AGENTS/ACTIVE_PHASE.md
+cat AGENTS/PROGRESS_DASHBOARD.md
+cat AGENTS/<Your Phase>/README.md
+cat AGENTS/<Your Phase>/CHECKLIST.md
+```
+
+### Step 3: Identify Your Scope
+- Find YOUR agent section in CHECKLIST.md
+- ONLY do tasks listed under YOUR section
+- Do NOT do tasks from other agents' sections
+
+**Output confirmation:**
+```
+[System] Hybrid Brain Loaded. Memory: loaded. Scope: My assigned section only.
+```
+
+---
 
 ## Current Phase
 - Phase ID: <PHASE_ID_E.G._PHASE_1_FOUNDATION>

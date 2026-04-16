@@ -2,6 +2,13 @@
 
 **⚠️ CRITICAL: Every agent MUST load `.github/copilot-instructions.md` at startup. NO EXCEPTIONS.**
 
+**🚨 STRICT RULES — EVERY AGENT MUST FOLLOW:**
+
+1. **Load copilot-instructions.md FIRST** — Before any other file
+2. **Load ALL memory files BEFORE any task** — Not optional, MANDATORY
+3. **Write to memory AFTER every action** — Not optional, MANDATORY
+4. **ONLY do tasks in YOUR checklist section** — Do NOT do other agents' tasks
+
 These instructions define how Copilot agents should operate for this repository under an Agentic Workflow framework.
 
 ## Documentation Links

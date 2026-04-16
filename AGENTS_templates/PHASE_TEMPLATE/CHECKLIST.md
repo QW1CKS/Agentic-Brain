@@ -1,5 +1,13 @@
 # Phase <Number> Checklist - <Phase Name>
 
+**🚨 CRITICAL: Every agent MUST follow these rules — NO EXCEPTIONS**
+
+## Agent Scope Rules
+1. **ONLY do tasks under YOUR agent section** — Do NOT do tasks from other agents' sections
+2. **Load ALL memory files BEFORE any task** — Not optional, MANDATORY
+3. **Write to memory AFTER every action** — Not optional, MANDATORY
+4. **Load copilot-instructions.md FIRST** — Before any other file
+
 ## Related Docs
 
 - Overview: [../../README.md](../../README.md)
@@ -31,6 +39,69 @@
 	- action row reference in `.github/agent_memory/03_actions.tsv`.
 - Do not rewrite old evidence lines; append updates instead.
 
+---
+
+## 🚨 MANDATORY PRE-FLIGHT: BEFORE ANY TASK
+
+**You MUST do this BEFORE doing ANY work:**
+
+### Step 1: Load copilot-instructions.md (ALWAYS FIRST)
+```powershell
+cat .github/copilot-instructions.md
+```
+
+### Step 2: Load Memory Files (ALL REQUIRED)
+```powershell
+# Core memory
+cat .github/agent_memory/00_index.md
+cat .github/agent_memory/01_decisions.md
+cat .github/agent_memory/02_learnings.md
+cat .github/agent_memory/03_actions.tsv
+cat .github/agent_memory/04_blockers.md
+cat .github/agent_memory/05_handoffs.tsv
+cat .github/agent_memory/06_memory_health.md
+# Catalogs
+cat .github/agentic_brain/catalog/awesome-catalog.yaml
+cat .github/agentic_brain/catalog/required-assets.yaml
+# Phase docs
+cat AGENTS/ACTIVE_PHASE.md
+cat AGENTS/PROGRESS_DASHBOARD.md
+cat AGENTS/<Your Phase>/README.md
+```
+
+### Step 3: Identify Your Scope
+- Find YOUR agent section in this checklist
+- ONLY do tasks listed under YOUR section
+- Do NOT do tasks from other agents' sections
+
+**Output confirmation:**
+```
+[System] Hybrid Brain Loaded. Memory: loaded. Scope: My assigned section only.
+```
+
+---
+
+## 🚨 MANDATORY MEMORY WRITE: AFTER EVERY ACTION
+
+**After completing EACH task, you MUST:**
+
+### 1. Append to 03_actions.tsv
+```
+<timestamp>	<your-agent>.<phase>	<what you did>	<files changed>	<linked>
+```
+
+### 2. If architectural decision, append to 01_decisions.md
+
+### 3. If reusable insight, append to 02_learnings.md
+
+### 4. If blocked, append to 04_blockers.md
+
+### 5. If passing work, append to 05_handoffs.tsv
+
+**NEVER finish a task without writing to memory.**
+
+---
+
 ## Required Agent Memory Workflow
 - Before any task execution, perform a silent pre-flight read of:
 	- `.github/copilot-instructions.md`
@@ -53,6 +124,9 @@
 ---
 
 ## Agent 1 - `.github/agents/agents-orchestrator.agent.md`
+
+**🚨 SCOPE: ONLY do tasks listed below. Do NOT do other agents' tasks.**
+
 ### Memory Read
 - [ ] Pre-flight checklist completed and all required memory/catalog files loaded.
 
@@ -83,6 +157,9 @@
 ---
 
 ## Agent 2 - `<path/to/some-agent.agent.md>`
+
+**🚨 SCOPE: ONLY do tasks listed below. Do NOT do other agents' tasks.**
+
 ### Memory Read
 - [ ] Pre-flight checklist completed and all required memory/catalog files loaded.
 
@@ -112,6 +189,9 @@
 ---
 
 ## Agent 3 - `.github/agents/agents-orchestrator.agent.md` (Closing)
+
+**🚨 SCOPE: ONLY do tasks listed below. Do NOT do other agents' tasks.**
+
 ### Memory Read
 - [ ] Pre-flight checklist completed and all required memory/catalog files loaded.
 

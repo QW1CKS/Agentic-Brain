@@ -1,5 +1,15 @@
 # Agentic Brain
 
+**🚨 CRITICAL: Every agent MUST follow these rules — NO EXCEPTIONS**
+
+## Agent Scope Rules
+1. **ONLY do tasks under YOUR agent section** — Do NOT do tasks from other agents' sections
+2. **Load ALL memory files BEFORE any task** — Not optional, MANDATORY
+3. **Write to memory AFTER every action** — Not optional, MANDATORY
+4. **Load copilot-instructions.md FIRST** — Before any other file
+
+---
+
 Agentic Brain is an installable, repo-adaptive Copilot workflow template.
 
 It combines:
