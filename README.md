@@ -28,6 +28,98 @@ When a user asks Copilot to install Agentic Brain in any repository, the install
 4. Generate a curated required-agent set for the detected repo profile.
 5. Bootstrap a strict append-only memory graph with linked ledgers and logs.
 
+## Installation Flow
+
+```mermaid
+graph TD
+    A[User: "Install Agentic Brain"] --> B[Scaffolding Script]
+    B --> C[Creates Folder Structure]
+    C --> D[Phase 1 Complete]
+    
+    D --> E[Switch to Installer Agent]
+    E --> F[User Provides Project Idea]
+    F --> G[Write PRD & Configure Phases]
+    G --> H[Phase 2 Complete]
+    
+    H --> I[Switch to Asset Curator]
+    I --> J[Analyze PRD & Select Assets]
+    J --> K[Copy to VSCode Locations]
+    K --> L[Update Phase Docs]
+    L --> M[Phase 3 Complete]
+    
+    M --> N[Project Ready for Development]
+    
+    style A fill:#e1f5fe
+    style D fill:#e8f5e8
+    style M fill:#e8f5e8
+    style N fill:#fff3e0
+```
+
+## Folder Structure
+
+```mermaid
+graph TD
+    subgraph Target Repository
+        A[.github/] --> B[agents/]
+        A --> C[hooks/]
+        A --> D[workflows/]
+        A --> E[skills/]
+        A --> F[copilot-instructions.md]
+        A --> G[agent_memory/]
+        A --> H[agentic_brain/]
+        
+        G --> G1[00_index.md]
+        G --> G2[01_decisions.md]
+        G --> G3[02_learnings.md]
+        G --> G4[03_actions.tsv]
+        G --> G5[04_blockers.md]
+        G --> G6[05_handoffs.tsv]
+        G --> G7[06_memory_health.md]
+        
+        H --> H1[catalog/]
+        H --> H2[vendor/awesome-copilot/]
+    end
+    
+    I[AGENTS/] --> I1[ACTIVE_PHASE.md]
+    I --> I2[PROGRESS_DASHBOARD.md]
+    I --> I3[Phase 1 - Foundation/]
+    I --> I4[Phase 2 - Implementation/]
+    
+    style A fill:#f3e5f5
+    style G fill:#e3f2fd
+    style I fill:#fce4ec
+```
+
+## Memory System
+
+```mermaid
+graph LR
+    A[Agent Starts] --> B[Pre-Flight: Read Memory]
+    B --> C[00_index.md]
+    B --> D[01_decisions.md]
+    B --> E[02_learnings.md]
+    B --> F[03_actions.tsv]
+    B --> G[04_blockers.md]
+    B --> H[05_handoffs.tsv]
+    
+    C --> I[Execute Task]
+    D --> I
+    E --> I
+    F --> I
+    G --> I
+    H --> I
+    
+    I --> J[Post-Task: Write Memory]
+    J --> K[Append to 03_actions.tsv]
+    J --> L[Append to 01_decisions.md if decision made]
+    J --> M[Append to 02_learnings.md if insight gained]
+    J --> N[Append to 05_handoffs.tsv if handoff]
+    
+    style A fill:#e1f5fe
+    style I fill:#fff3e0
+    style J fill:#e8f5e8
+```
+
 ## Core Subset Scope
 
 The local `awesome-copilot-main/` snapshot is intentionally limited to:
