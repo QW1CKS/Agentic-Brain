@@ -36,6 +36,21 @@ When user intent is "install Agentic Brain" or equivalent:
   - initialize append-only memory files.
 - Output installation report with profile, imported counts, curated required list, and blockers.
 
+Automatic trigger (chat-driven install)
+
+- When the user issues the exact phrase: "Install Agentic Brain for this repository." the Copilot assistant **must** perform an automated curated install according to the following flow (no manual CLI steps required from the user):
+  1. Perform the Pre-Flight Memory Read (see Memory Read list below).
+  2. Detect an `idea.md` / `IDEA.md` / `idea.txt` in the repo root and use it as the curation seed. If none exists, ask the user in-chat for a short title and one-line description and accept that reply as the idea seed.
+  3. Run the curated installer: `node scripts/install-agentic-brain.mjs --target "<repoRoot>" --idea "<inline idea text>"`. Use `--dry-run` first if user requested a preview.
+  4. Run `node scripts/validate-memory.mjs --target "<repoRoot>"` and present the validation summary.
+  5. If any template placeholders remain, list them and ask the user whether to supply missing values or re-run with `--force` (explicit confirmation required to auto-fill with `TBD`).
+  6. On success, present the `install-report.json` summary and link to the new catalog and required-assets YAML.
+
+Notes:
+- The assistant must never write to `.github_templates/` — only to the target repository (workspace root).
+- Always preserve provenance: include `ideaSource` and `curatedCount` in summaries and TSV telemetry.
+- If the assistant cannot run local commands due to environment restrictions, clearly explain required steps and provide the exact CLI command to paste-run locally.
+
 Never silently skip installer steps.
 
 ## Second Brain Memory

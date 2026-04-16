@@ -38,6 +38,17 @@ Optional:
 - `--mode install|update`
 - `--profile auto|frontend|backend|fullstack|data|infra`
 
+New flags (curation)
+
+- `--idea <text|path>`: Provide a short idea or path to an idea file (e.g., `idea.md`). If omitted the installer will look for `idea.md`/`IDEA.md`/`idea.txt` in the target root. The idea's title and first paragraph are used to derive `projectName` and `projectDescription` for template curation.
+- `--dry-run`: Preview curation changes and detect any remaining placeholders without writing curated content.
+- `--force`: If provided, the installer will auto-fill remaining unknown template placeholders with `TBD` and continue (useful for automated installs).
+
+Behavior notes:
+
+- The installer performs a curation pass over copied `.github`, `AGENTS`, and `PRD_TEMPLATE.md` files to replace template tokens (e.g., `<Project Name>`, `<Phase Name>`, `<agent_path>`) using heuristics derived from the provided idea. By default the installer will abort if any placeholders remain after heuristics; use `--force` to auto-fill with `TBD`.
+- Use `--dry-run` to preview which files would be modified and to see any unfilled placeholders before making changes in the target repository.
+
 ## Validation
 
 ```powershell
