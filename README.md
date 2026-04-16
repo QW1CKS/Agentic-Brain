@@ -59,8 +59,40 @@ Use natural language in a target repo, for example:
 
 The expected behavior is:
 1. Copilot runs repository introspection.
-2. Copilot executes the installer script in this template.
-3. Copilot outputs a concise installation report and next actions.
+2. Copilot executes the scaffolding script first to create basic folder structure.
+3. Copilot outputs instructions to switch to "Copilot Agentic Brain Installer" agent.
+4. The installer agent then curates agents, instructions, hooks based on project idea.
+
+## Two-Phase Installation Flow
+
+**Phase 1: Scaffolding**
+When the user says "Install Agentic Brain for this repository", Copilot will:
+1. Run the scaffolding script: `node scripts/scaffold-agentic-brain.mjs --target "<repoRoot>"`
+2. This creates empty/placeholder folders and base memory files:
+   - `.github/copilot-instructions.md`
+   - `.github/agent_memory/` (with templates)
+   - `.github/agentic_brain/` (empty catalog/vendor folders)
+   - `.github/agents/` (empty - will be populated later)
+   - `AGENTS/` (with placeholder phases)
+   - `PRD_TEMPLATE.md`
+3. Copilot tells the user to switch to "Copilot Agentic Brain Installer" agent
+
+**Phase 2: Full Curated Installation**
+When the user switches to "Copilot Agentic Brain Installer" and provides their project idea:
+1. The installer collects the project idea/need from the user
+2. Writes a detailed PRD based on the idea
+3. Detects the repository profile (frontend/backend/fullstack/etc.)
+4. Curates appropriate agents from awesome-copilot-main (NOT pre-set)
+5. Curates instructions, hooks, workflows as needed
+6. Configures phases with detailed documentation
+7. Updates all memory files and documentation
+8. Runs a consistency sweep for errors and broken links
+
+**Key Principles:**
+- No pre-set agents in `.github_templates/agents/` — all agents are curated fresh per-project
+- The installer ALWAYS works OUTSIDE the Agentic Brain template folder
+- The installer continues until complete — only stops on blockers requiring user intervention
+- Every agent MUST load `.github/copilot-instructions.md` at startup (no exceptions)
 
 ## Local Script Install (Deterministic)
 

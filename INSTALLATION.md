@@ -11,43 +11,54 @@
 - Phase README template: [AGENTS_templates/PHASE_TEMPLATE/README.md](AGENTS_templates/PHASE_TEMPLATE/README.md)
 - Phase checklist template: [AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md](AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md)
 
-## Copilot Chat Install
+## Two-Phase Installation
 
-In a target repository, ask Copilot:
+Agentic Brain uses a two-phase installation to ensure proper curation of agents, instructions, and hooks based on your specific project needs.
+
+### Phase 1: Scaffolding
+
+In a target repository (NOT in the Agentic Brain template folder), ask Copilot:
 - "Install Agentic Brain for this repository."
 
-Expected actions:
-1. Profile detection (frontend/backend/fullstack/data/infra).
-2. Template copy (`.github_templates` -> `.github`, `AGENTS_templates` -> `AGENTS`).
-3. awesome-copilot core-subset import into `.github/agentic_brain/vendor/awesome-copilot/`.
-	- Imported folders: `agents`, `instructions`, `skills`, `hooks`, `workflows`, `plugins`
-	- Imported files: `LICENSE`, `README.md`
-4. Catalog generation and curated required set generation.
-5. Memory graph bootstrap and install log entries.
+**What happens:**
+1. Copilot runs `scripts/scaffold-agentic-brain.mjs` which creates:
+   - `.github/copilot-instructions.md` (critical - loaded by every agent)
+   - `.github/agent_memory/` (memory templates: 00_index.md, 01_decisions.md, etc.)
+   - `.github/agentic_brain/` (empty folders for catalog and vendor assets)
+   - `.github/agents/` (empty - will be populated by installer)
+   - `AGENTS/` (placeholder phases: Active Phase, Progress Dashboard, phase folders)
+   - `PRD_TEMPLATE.md` (will be filled in detail by installer)
+2. Copilot tells you to **switch to "Copilot Agentic Brain Installer"** agent
+3. **Do NOT work in the Agentic Brain template folder** - this scaffolding goes in your actual project repo
+
+### Phase 2: Full Curated Installation
+
+After switching to "Copilot Agentic Brain Installer" agent, provide your project idea/need:
+- What is your project called?
+- What problem does it solve?
+- Who is the target audience?
+- What type of application (frontend, backend, mobile, etc.)?
+- Any specific technologies?
+
+**The installer will then:**
+1. Write a detailed PRD based on your idea
+2. Detect your repository profile (frontend/backend/fullstack/data/infra)
+3. **Curate agents** from awesome-copilot-main (NOT pre-set - picked fresh for your project)
+4. Curate instructions, hooks, workflows as needed
+5. Configure phases with detailed documentation
+6. Update all memory files
+7. Run a consistency sweep for errors and broken links
+8. Continue until complete - only stops on blockers needing your input
 
 ## Script Install
 
-Run from this template root:
+If you prefer to run the scaffolding manually, run from this template root:
 
 ```powershell
-node .\scripts\install-agentic-brain.mjs --target "C:\path\to\repo"
+node .\scripts\scaffold-agentic-brain.mjs --target "C:\path\to\repo"
 ```
 
-Optional:
-- `--source <path>`
-- `--mode install|update`
-- `--profile auto|frontend|backend|fullstack|data|infra`
-
-New flags (curation)
-
-- `--idea <text|path>`: Provide a short idea or path to an idea file (e.g., `idea.md`). If omitted the installer will look for `idea.md`/`IDEA.md`/`idea.txt` in the target root. The idea's title and first paragraph are used to derive `projectName` and `projectDescription` for template curation.
-- `--dry-run`: Preview curation changes and detect any remaining placeholders without writing curated content.
-- `--force`: If provided, the installer will auto-fill remaining unknown template placeholders with `TBD` and continue (useful for automated installs).
-
-Behavior notes:
-
-- The installer performs a curation pass over copied `.github`, `AGENTS`, and `PRD_TEMPLATE.md` files to replace template tokens (e.g., `<Project Name>`, `<Phase Name>`, `<agent_path>`) using heuristics derived from the provided idea. By default the installer will abort if any placeholders remain after heuristics; use `--force` to auto-fill with `TBD`.
-- Use `--dry-run` to preview which files would be modified and to see any unfilled placeholders before making changes in the target repository.
+This creates the basic folder structure. Then switch to Copilot Agentic Brain Installer for full configuration.
 
 ## Validation
 

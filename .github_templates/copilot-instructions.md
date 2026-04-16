@@ -1,5 +1,7 @@
 # <Project Name> Copilot Workflow Instructions
 
+**⚠️ CRITICAL: Every agent MUST load `.github/copilot-instructions.md` at startup. NO EXCEPTIONS.**
+
 These instructions define how Copilot agents should operate for this repository under an Agentic Workflow framework.
 
 ## Documentation Links
@@ -28,28 +30,24 @@ These instructions define how Copilot agents should operate for this repository 
 
 When user intent is "install Agentic Brain" or equivalent:
 - Detect repository profile (frontend/backend/fullstack/data/infra).
-- Run installer workflow to:
-  - copy `.github_templates/` to `.github/`,
-  - copy `AGENTS_templates/` to `AGENTS/`,
-  - import awesome-copilot core subset (`agents`, `instructions`, `skills`, `hooks`, `workflows`, `plugins`, `LICENSE`, `README.md`),
-  - generate local catalog and curated required set,
-  - initialize append-only memory files.
-- Output installation report with profile, imported counts, curated required list, and blockers.
+- Run the scaffolding script to create basic folder structure
+- Tell the user to switch to "Copilot Agentic Brain Installer" agent
+- The installer agent will then complete the full curated installation
 
 Automatic trigger (chat-driven install)
 
-- When the user issues the exact phrase: "Install Agentic Brain for this repository." the Copilot assistant **must** perform an automated curated install according to the following flow (no manual CLI steps required from the user):
+- When the user issues the exact phrase: "Install Agentic Brain for this repository." the Copilot assistant **must** perform the scaffolding step according to the following flow (no manual CLI steps required from the user):
   1. Perform the Pre-Flight Memory Read (see Memory Read list below).
-  2. Detect an `idea.md` / `IDEA.md` / `idea.txt` in the repo root and use it as the curation seed. If none exists, ask the user in-chat for a short title and one-line description and accept that reply as the idea seed.
-  3. Run the curated installer: `node scripts/install-agentic-brain.mjs --target "<repoRoot>" --idea "<inline idea text>"`. Use `--dry-run` first if user requested a preview.
-  4. Run `node scripts/validate-memory.mjs --target "<repoRoot>"` and present the validation summary.
-  5. If any template placeholders remain, list them and ask the user whether to supply missing values or re-run with `--force` (explicit confirmation required to auto-fill with `TBD`).
-  6. On success, present the `install-report.json` summary and link to the new catalog and required-assets YAML.
+  2. Run the scaffolding script: `node scripts/scaffold-agentic-brain.mjs --target "<repoRoot>"`
+  3. After scaffolding completes, tell the user to switch to "Copilot Agentic Brain Installer" agent
+  4. Provide clear instructions that the user needs to describe their project idea/need to the installer agent
+
+**IMPORTANT: The scaffolding script creates empty/placeholder folders. The actual curated agent selection happens via the "Copilot Agentic Brain Installer" agent - this is the key difference from the old flow.**
 
 Notes:
 - The assistant must never write to `.github_templates/` — only to the target repository (workspace root).
-- Always preserve provenance: include `ideaSource` and `curatedCount` in summaries and TSV telemetry.
-- If the assistant cannot run local commands due to environment restrictions, clearly explain required steps and provide the exact CLI command to paste-run locally.
+- Always work OUTSIDE the Agentic Brain template folder - the target is the user's actual project repository
+- After scaffolding, clearly instruct the user to switch agents for full installation
 
 Never silently skip installer steps.
 
@@ -132,6 +130,43 @@ Memory compression policy:
 Safety boundary:
 - Do not auto-enable untrusted external plugin sources.
 - Preserve provenance metadata when referencing imported assets.
+
+## MANDATORY: Every Agent MUST Load Copilot-Instructions
+
+**THIS IS NON-NEGOTIABLE — NO EXCEPTIONS.**
+
+Every single custom agent in this repository MUST load the `.github/copilot-instructions.md` file at startup before doing ANY other work.
+
+This requirement applies to:
+- All agents in `.github/agents/*.agent.md`
+- All agents in `AGENTS/*/` subdirectories
+- Any agent imported from awesome-copilot-main
+
+**Why this matters:**
+- The copilot-instructions.md file contains the core operating rules for this Agentic Brain workflow
+- It defines how to read memory, how to write updates, and the phase-driven execution model
+- Without loading this file, agents operate outside the intended workflow and cause inconsistencies
+
+**Implementation:**
+Add this as the FIRST step in your `Critical Startup Steps` block:
+```
+### Memory Read (MANDATORY - DO THIS FIRST)
+- Read .github/copilot-instructions.md  <-- THIS IS REQUIRED FOR EVERY AGENT
+- Read AGENTS/ACTIVE_PHASE.md
+- Read AGENTS/PROGRESS_DASHBOARD.md
+- Read AGENTS/<current-phase>/README.md
+- Read AGENTS/<current-phase>/CHECKLIST.md
+- Read .github/agent_memory/00_index.md
+- Read .github/agent_memory/01_decisions.md
+- Read .github/agent_memory/02_learnings.md
+- Read .github/agent_memory/03_actions.tsv
+- Read .github/agent_memory/04_blockers.md
+- Read .github/agent_memory/05_handoffs.tsv
+- Read .github/agent_memory/06_memory_health.md
+- Read .github/agentic_brain/catalog/awesome-catalog.yaml
+- Read .github/agentic_brain/catalog/required-assets.yaml
+- If present, read AGENTS/<current-phase>/<agent-specific-file>.md
+```
 
 ## Custom Agent Authoring Rule
 
