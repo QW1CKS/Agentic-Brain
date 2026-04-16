@@ -31,8 +31,8 @@ When a user asks Copilot to install Agentic Brain in any repository, the install
 ## Installation Flow
 
 ```mermaid
-graph TD
-    A[User: "Install Agentic Brain"] --> B[Scaffolding Script]
+flowchart TD
+    A["User: Install Agentic Brain"] --> B[Scaffolding Script]
     B --> C[Creates Folder Structure]
     C --> D[Phase 1 Complete]
     
@@ -48,18 +48,13 @@ graph TD
     L --> M[Phase 3 Complete]
     
     M --> N[Project Ready for Development]
-    
-    style A fill:#e1f5fe
-    style D fill:#e8f5e8
-    style M fill:#e8f5e8
-    style N fill:#fff3e0
 ```
 
 ## Folder Structure
 
 ```mermaid
-graph TD
-    subgraph Target Repository
+flowchart TD
+    subgraph Target["Target Repository"]
         A[.github/] --> B[agents/]
         A --> C[hooks/]
         A --> D[workflows/]
@@ -84,16 +79,12 @@ graph TD
     I --> I2[PROGRESS_DASHBOARD.md]
     I --> I3[Phase 1 - Foundation/]
     I --> I4[Phase 2 - Implementation/]
-    
-    style A fill:#f3e5f5
-    style G fill:#e3f2fd
-    style I fill:#fce4ec
 ```
 
 ## Memory System
 
 ```mermaid
-graph LR
+flowchart LR
     A[Agent Starts] --> B[Pre-Flight: Read Memory]
     B --> C[00_index.md]
     B --> D[01_decisions.md]
@@ -111,13 +102,9 @@ graph LR
     
     I --> J[Post-Task: Write Memory]
     J --> K[Append to 03_actions.tsv]
-    J --> L[Append to 01_decisions.md if decision made]
-    J --> M[Append to 02_learnings.md if insight gained]
-    J --> N[Append to 05_handoffs.tsv if handoff]
-    
-    style A fill:#e1f5fe
-    style I fill:#fff3e0
-    style J fill:#e8f5e8
+    J --> L[Append to 01_decisions.md]
+    J --> M[Append to 02_learnings.md]
+    J --> N[Append to 05_handoffs.tsv]
 ```
 
 ## Core Subset Scope
