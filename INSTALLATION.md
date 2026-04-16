@@ -57,8 +57,9 @@ After switching to "Copilot Agentic Brain Installer" agent, provide your project
 2. **Copy this agent to `.github/agents/agentic-brain-installer.agent.md`** (CRITICAL - makes it available for future sessions)
 3. Detect your repository profile (frontend/backend/fullstack/data/infra)
 4. Define phase structure based on PRD
-5. Configure each phase with README and checklist
+5. Configure each phase with README and checklist (only orchestrator + reality checker)
 6. Update memory index and progress dashboard
+7. **Create `AGENTS/REQUIRED_ASSETS.md`** - general list of required asset categories
 
 ### Phase 3: Asset Selection & Import (Asset Curator Agent)
 
@@ -67,7 +68,10 @@ After switching to "Copilot Agentic Brain Installer" agent, provide your project
 1. The installer copies the Asset Curator agent to `.github/agents/`
 2. User switches to "Agentic Brain Asset Curator" agent
 3. The Asset Curator:
+   - Reads `AGENTS/REQUIRED_ASSETS.md` to know what asset categories are needed
    - Reads PRD.md to understand project requirements
+   - **Scans FULL awesome-copilot vendor folder** for ALL asset types (agents, hooks, instructions, workflows, skills)
+   - Matches categories to actual files in awesome-copilot
    - Analyzes tech stack and determines needed agent categories
    - Browses awesome-copilot vendor folder
    - Selects appropriate agents, hooks, workflows, skills

@@ -100,6 +100,7 @@ Your job is to set up the infrastructure only:
 - [ ] Run `ls .github/agents/` to confirm agentic-brain-asset-curator.agent.md exists
 - [ ] Read first 5 lines to verify it's NOT a placeholder/error message
 - [ ] Confirm file contains actual agent code (not "IMPORTANT: This agent was not properly copied")
+- [ ] Run `ls AGENTS/REQUIRED_ASSETS.md` to confirm it was created in Phase 2
 
 **Output:** Handoff to Phase 3 agent. No asset copying by installer.
 
@@ -110,7 +111,7 @@ Your job is to set up the infrastructure only:
 | Phase | Action | Output |
 |-------|--------|--------|
 | 1 | Write PRD | PRD.md |
-| 2 | Create phase docs | AGENTS/* |
+| 2 | Create phase docs + requirements | AGENTS/* + REQUIRED_ASSETS.md |
 | 3 | Copy assets | .github/agents/, hooks, workflows, skills |
 
 **DONE when framework is set up. NOT when features are implemented.**
@@ -229,6 +230,13 @@ For each phase, you MUST use the official phase templates from the Agentic Brain
 - ✅ Update only the placeholder variables
 - ✅ Keep the template's agent orchestration structure
 
+**CRITICAL - CHECKLIST AGENTS:**
+The CHECKLIST.md should ONLY list:
+- **Workflow Orchestrator** (e.g., agents-orchestrator.agent.md)
+- **Reality Checker** (e.g., critical-thinking.agent.md)
+
+**DO NOT add specific development agents to the checklist** - those will be added in Phase 3 when assets are actually imported.
+
 ### 2.4 Update Active Phase
 Set the first phase in `AGENTS/ACTIVE_PHASE.md`
 
@@ -243,6 +251,45 @@ Update `AGENTS/PROGRESS_DASHBOARD.md` with:
 - Project name
 - Phase structure
 - Initial metrics
+
+### 2.7 Create REQUIRED_ASSETS.md (CRITICAL - DO THIS)
+
+Based on PRD and user's project idea, create `AGENTS/REQUIRED_ASSETS.md`:
+
+**Template:** Copy from `AGENTS_templates/REQUIRED_CUSTOM_AGENTS.md`
+
+Update these sections based on PRD:
+- **Repo Type:** frontend/backend/fullstack/data/infra
+- **Tech Stack:** React, Python, Go, etc.
+- **Special Needs:** security, CI/CD, testing, etc.
+
+**List required asset CATEGORIES (not specific files):**
+```
+## Required Agents
+- Workflow Orchestrator (always needed)
+- Reality Checker (always needed)
+- Architecture Agent (based on tech stack)
+- Development Agent (based on frontend/backend)
+- Testing Agent (if testing needed)
+- DevOps Agent (if CI/CD needed)
+
+## Required Hooks
+- Pre-commit hooks (lint, format)
+- CI validation hooks
+
+## Required Instructions
+- Code review guidelines
+- Testing standards
+
+## Required Workflows
+- CI/CD workflow
+- Code quality workflow
+
+## Required Skills
+- [Based on tech stack]
+```
+
+**IMPORTANT:** This is a GENERAL list - Asset Curator in Phase 3 will find exact file matches from awesome-copilot. Don't guess specific filenames.
 
 ---
 

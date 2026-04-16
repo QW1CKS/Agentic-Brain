@@ -81,41 +81,42 @@ BEFORE doing anything else, read these files:
 5. `PRD.md` - project requirements and tech stack
 6. `AGENTS/ACTIVE_PHASE.md` - current phase state
 7. `AGENTS/PROGRESS_DASHBOARD.md` - overall project status
+8. **`AGENTS/REQUIRED_ASSETS.md`** - REQUIRED - the list of asset categories needed
 
 ---
 
 ## Phase 3 Workflow
 
-### 3.1 Analyze Project Requirements
+### 3.1 Read Required Assets List (CRITICAL)
+First, read `AGENTS/REQUIRED_ASSETS.md` - this tells you what categories of assets are needed:
+- Required agents (categories)
+- Required hooks
+- Required instructions
+- Required workflows
+- Required skills
 
+### 3.2 Analyze Project Requirements
 Read `PRD.md` and extract:
 - **Project type**: frontend, backend, fullstack, mobile, data, infra?
 - **Tech stack**: React, NextJS, Python, Go, etc.
 - **Features needed**: API, database, auth, CI/CD, testing?
 - **Special requirements**: security, accessibility, performance?
 
-### 3.2 Determine Agent Categories Needed
-
-Based on project profile, determine what categories to select:
-
-| Project Type | Typical Agents Needed |
-|--------------|----------------------|
-| Frontend | orchestrator, frontend-dev, ui-designer, tester, accessibility |
-| Backend | orchestrator, backend-dev, api-architect, devops, security |
-| Fullstack | orchestrator, frontend-dev, backend-dev, fullstack-dev, tester |
-| Data/ML | orchestrator, data-engineer, ml-engineer, devops |
-| Infrastructure | orchestrator, cloud-architect, devops, security |
-
-### 3.3 Browse Awesome-Copilot Catalog
+### 3.3 Scan FULL Awesome-Copilot (NOT Just Categories)
 
 **Source location:** `.github/agentic_brain/vendor/awesome-copilot/`
 
-Browse these folders:
-- `agents/` - List all available agents and their descriptions
-- `instructions/` - Available instruction sets
-- `hooks/` - Available hook scripts
-- `workflows/` - Available GitHub Actions workflows
-- `skills/` - Available skills
+**You MUST scan these ENTIRE folders:**
+- `agents/` - List ALL agents, find matches for required categories
+- `instructions/` - Scan ALL instruction files
+- `hooks/` - Scan ALL hook scripts
+- `workflows/` - Scan ALL GitHub Actions workflows
+- `skills/` - Scan ALL skills
+
+**For each required category in REQUIRED_ASSETS.md:**
+1. Search through the ENTIRE relevant folder
+2. Find files that match the category description
+3. Select the best-fit ones based on tech stack
 
 ### 3.4 Select Appropriate Assets
 
