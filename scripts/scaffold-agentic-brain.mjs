@@ -276,7 +276,7 @@ function createScaffolding(targetRoot, dryRun = false) {
     
     // Copy the Agentic Brain Installer agent to .github/agents/
     // This makes it available as a selectable agent immediately after scaffolding
-    const installerAgentSrc = path.join(process.cwd(), ".github_templates", "agents", "agentic-brain-installer.agent.md");
+    const installerAgentSrc = path.join(templateRoot, ".github_templates", "agents", "agentic-brain-installer.agent.md");
     const installerAgentDest = path.join(agentsDest, "agentic-brain-installer.agent.md");
     if (fs.existsSync(installerAgentSrc)) {
       fs.copyFileSync(installerAgentSrc, installerAgentDest);
