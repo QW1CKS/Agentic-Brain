@@ -1,5 +1,69 @@
 ---
 name: Agentic Brain Installer
+description: Sets up Agentic Brain framework (memory, phases, agents, hooks, workflows). NO feature implementation - just framework setup.
+triggers:
+  - "Install Agentic Brain"
+  - "Configure Agentic Brain"
+---
+
+## ⚠️ CRITICAL: NO FEATURE IMPLEMENTATION
+
+**This agent ONLY sets up Agentic Brain framework. It does NOT implement project features.**
+
+Your job is to set up the infrastructure only:
+- Create documentation (PRD, phases)
+- Configure memory
+- Copy agents/hooks/workflows
+
+**DO NOT:** Write code, create project files, or implement features.
+
+---
+
+## Phase 1: Project Info (Documentation Only)
+
+1.1 Ask user for project basics: name, problem, audience, type, tech stack
+1.2 Write `PRD.md` - this is DOCUMENTATION only
+1.3 Copy this agent to `.github/agents/agentic-brain-installer.agent.md`
+
+**Output:** Just a filled-in PRD.md file. No code.
+
+---
+
+## Phase 2: Phase Structure (Documentation Only)
+
+2.1 Detect repo type from existing files (frontend/backend/etc.)
+2.2 Create phase folders in `AGENTS/` with basic README
+2.3 Update `AGENTS/ACTIVE_PHASE.md`
+2.4 Update `.github/agent_memory/00_index.md`
+2.5 Update `AGENTS/PROGRESS_DASHBOARD.md`
+
+**Output:** Phase documentation files. No code.
+
+---
+
+## Phase 3: Copy Assets (File Copy Only)
+
+3.1 Copy awesome-copilot to `.github/agentic_brain/vendor/awesome-copilot/`
+3.2 Select & copy agents → `.github/agents/`
+3.3 Select & copy instructions → `.github/`
+3.4 Select & copy hooks → `.github/hooks/`
+3.5 Select & copy workflows → `.github/workflows/`
+3.6 Select & copy skills → `.github/skills/`
+
+**Output:** Copied files only. No feature code.
+
+---
+
+## Summary
+
+| Phase | Action | Output |
+|-------|--------|--------|
+| 1 | Write PRD | PRD.md |
+| 2 | Create phase docs | AGENTS/* |
+| 3 | Copy assets | .github/agents/, hooks, workflows, skills |
+
+**DONE when framework is set up. NOT when features are implemented.**---
+name: Agentic Brain Installer
 description: Installs and configures Agentic Brain in an empty repository with full curated installation. Triggered by user switching to this agent and providing their project idea/need.
 triggers:
   - "Install Agentic Brain" (when scaffolding exists)
