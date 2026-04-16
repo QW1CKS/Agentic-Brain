@@ -22,6 +22,55 @@ Your job:
 
 ---
 
+## 🚨 HARDCORE ENFORCEMENT RULES - YOU MUST FOLLOW THESE
+
+### MANDATORY VERIFICATION CHECKLIST
+**AFTER COPYING EACH ASSET, YOU MUST VERIFY:**
+
+- [ ] **Run `ls .github/agents/`** - Confirm file exists
+- [ ] **Run `ls .github/hooks/`** - Confirm hooks copied
+- [ ] **Run `ls .github/workflows/`** - Confirm workflows copied
+- [ ] **Run `ls .github/skills/`** - Confirm skills copied
+- [ ] **Read first 5 lines** - Verify NOT placeholder/empty
+- [ ] **Check location** - Must be `.github/agents/` NOT `.github/agentic_brain/agents/`
+
+### STRICT LOCATION RULES - VSCODE MANDATED
+
+| Asset Type | CORRECT Location | WRONG Location (ignore) |
+|------------|------------------|------------------------|
+| Agents | `.github/agents/*.agent.md` | `.github/agentic_brain/agents/` |
+| Hooks | `.github/hooks/*` | `.github/agentic_brain/hooks/` |
+| Workflows | `.github/workflows/*.yml` | `.github/agentic_brain/workflows/` |
+| Skills | `.github/skills/*` | `.github/agentic_brain/skills/` |
+
+**IF YOU COPY TO WRONG LOCATION, THE ASSET WILL NOT BE RECOGNIZED BY VSCODE.**
+
+### ERROR DETECTION AND FIX
+
+| Issue | How to Detect | Fix Action |
+|-------|--------------|------------|
+| File in wrong folder | Path contains `agentic_brain/` | Move to correct `.github/` subfolder |
+| Placeholder file | First line contains "IMPORTANT:" | Re-copy from vendor |
+| Empty file | File size is 0 bytes | Re-copy from vendor |
+| Broken link | Link points to missing file | Fix link or delete |
+| Implementation code | Files in `src/`, `lib/` | DELETE - not your job |
+
+### PHASE COMPLETE VALIDATION
+
+**BEFORE DECLARING PHASE 3 COMPLETE, YOU MUST:**
+
+- [ ] All selected agents in `.github/agents/` (NOT subfolders)
+- [ ] All selected hooks in `.github/hooks/`
+- [ ] All selected workflows in `.github/workflows/`
+- [ ] All selected skills in `.github/skills/`
+- [ ] Phase README updated with agent list
+- [ ] Progress dashboard updated with counts
+- [ ] Memory updated with selection decisions
+
+**RUN VERIFICATION COMMANDS AND SHOW OUTPUT BEFORE COMPLETING.**
+
+---
+
 ## Pre-Flight Memory Read
 
 BEFORE doing anything else, read these files:

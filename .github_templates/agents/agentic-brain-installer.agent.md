@@ -19,6 +19,49 @@ Your job is to set up the infrastructure only:
 
 ---
 
+## 🚨 HARDCORE ENFORCEMENT RULES - YOU MUST FOLLOW THESE
+
+### MANDATORY VERIFICATION CHECKLIST
+**AFTER EACH MAJOR ACTION, YOU MUST VERIFY:**
+
+- [ ] **File exists** - Did the file actually get created?
+- [ ] **Correct location** - Is it in the RIGHT folder?
+- [ ] **Correct name** - Does the filename match exactly?
+- [ ] **Content valid** - Does it have the expected content?
+- [ ] **Links work** - Are all internal links valid?
+
+### STRICT OUTPUT VALIDATION
+**BEFORE CONSIDERING A PHASE COMPLETE, YOU MUST:**
+
+1. **List the directory** - Use `ls` or `dir` to confirm files exist
+2. **Read a sample** - read_file first 10 lines to confirm content
+3. **Check path** - Verify path is `.github/agents/` NOT `.github/agentic_brain/agents/`
+4. **Verify links** - Check that links point to existing files
+
+### ERROR DETECTION RULES
+**IF YOU DETECT ANY OF THESE, YOU MUST FIX IMMEDIATELY:**
+
+| Error Type | Detection | Fix Action |
+|------------|-----------|------------|
+| File missing | `ls` shows no file | Recreate from template |
+| Wrong location | Path contains `agentic_brain/agents/` | Move to `.github/agents/` |
+| Broken link | Link points to non-existent file | Fix link or create file |
+| Template not used | Custom checklist items | Delete and copy template |
+| Code written | Any `.ts`, `.js`, `.py` files | DELETE immediately |
+| PRD named wrong | File is `PRD_TEMPLATE.md` | Rename to `PRD.md` |
+
+### PHASE GATE ENFORCEMENT
+**YOU CANNOT PROCEED TO NEXT PHASE UNLESS:**
+
+- [ ] Current phase output verified AND
+- [ ] All files in correct locations AND
+- [ ] No implementation code written AND
+- [ ] Memory updated with action log
+
+**IF YOU SKIP VERIFICATION, THE INSTALLATION IS CONSIDERED FAILED.**
+
+---
+
 ## Phase 1: Project Info (Documentation Only)
 
 1.1 **Ask user for their project idea** - What do they want to build?
@@ -37,6 +80,12 @@ Your job is to set up the infrastructure only:
 2.4 Update `.github/agent_memory/00_index.md`
 2.5 Update `AGENTS/PROGRESS_DASHBOARD.md`
 
+**✅ PHASE 2 VERIFICATION - MANDATORY:**
+- [ ] Run `ls AGENTS/` to confirm phase folders exist
+- [ ] Run `ls AGENTS/<Phase Name>/` to confirm README.md and CHECKLIST.md exist
+- [ ] Verify CHECKLIST.md uses TEMPLATE structure (not custom implementation tasks)
+- [ ] Verify phase folder names use SPACES not URL-encoded (e.g., "Phase 1 - Foundation" NOT "Phase%201%20-%20Foundation")
+
 **Output:** Phase documentation files. No code.
 
 ---
@@ -46,6 +95,11 @@ Your job is to set up the infrastructure only:
 3.1 Copy the Asset Curator agent to `.github/agents/agentic-brain-asset-curator.agent.md`
 3.2 Tell user to switch to "Agentic Brain Asset Curator" agent
 3.3 The Asset Curator will analyze PRD and select appropriate assets
+
+**✅ PHASE 3 VERIFICATION - MANDATORY:**
+- [ ] Run `ls .github/agents/` to confirm agentic-brain-asset-curator.agent.md exists
+- [ ] Read first 5 lines to verify it's NOT a placeholder/error message
+- [ ] Confirm file contains actual agent code (not "IMPORTANT: This agent was not properly copied")
 
 **Output:** Handoff to Phase 3 agent. No asset copying by installer.
 
@@ -67,7 +121,7 @@ Your job is to set up the infrastructure only:
 - This agent operates in the target repository where scaffolding was created
 - NEVER work inside the `Agentic Brain` template folder itself
 - All file operations should be in the target repository (the user's actual project)
-- The target repository has: `.github/agent_memory/`, `.github/agentic_brain/`, `AGENTS/`, `PRD_TEMPLATE.md`
+- The target repository has: `.github/agent_memory/`, `.github/agentic_brain/`, `AGENTS/`, `PRD.md`
 
 ## Critical Startup Steps
 
@@ -87,7 +141,7 @@ BEFORE doing anything else, perform these steps in exact order:
    - `.github/agent_memory/06_memory_health.md`
    - `AGENTS/ACTIVE_PHASE.md`
    - `AGENTS/PROGRESS_DASHBOARD.md`
-   - `PRD_TEMPLATE.md`
+   - `PRD.md`
 
 ---
 
@@ -102,7 +156,7 @@ The user MUST provide their project idea or need. Ask clarifying questions if ne
 - Any specific technologies already chosen?
 
 ### 1.2 Write Detailed PRD
-Based on the user's idea, create a comprehensive PRD in `PRD_TEMPLATE.md`:
+Based on the user's idea, create a comprehensive PRD in `PRD.md`:
 - **Project Name:** (from user)
 - **Description:** Detailed description of what the product is
 - **Target Audience:** Who will use this
