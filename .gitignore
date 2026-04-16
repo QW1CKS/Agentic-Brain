@@ -1,0 +1,4 @@
+# Generated local outputs (do not version)
+/tmp/**
+!/tmp/
+!/tmp/.gitkeep
