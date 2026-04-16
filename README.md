@@ -71,36 +71,48 @@ The expected behavior is:
 - Your actual project is where you want Agentic Brain to run
 - Example: If your project is at `Desktop/my-chrome-extension/`, run the scaffolding there
 
-## Two-Phase Installation Flow
+## Three-Phase Installation Flow
 
-**Phase 1: Scaffolding**
+### Phase 1: Scaffolding
 When the user says "Install Agentic Brain for this repository", Copilot will:
 1. Run the scaffolding script: `node scripts/scaffold-agentic-brain.mjs --target "<repoRoot>"`
 2. This creates empty/placeholder folders and base memory files:
    - `.github/copilot-instructions.md`
    - `.github/agent_memory/` (with templates)
    - `.github/agentic_brain/` (empty catalog/vendor folders)
-   - `.github/agents/` (empty - will be populated later)
+   - `.github/agents/` (empty - will be populated by installer)
+   - `.github/hooks/` (empty - will be populated by installer)
+   - `.github/workflows/` (empty - will be populated by installer)
+   - `.github/skills/` (empty - will be populated by installer)
    - `AGENTS/` (with placeholder phases)
    - `PRD_TEMPLATE.md`
 3. Copilot tells the user to switch to "Copilot Agentic Brain Installer" agent
 
-**Phase 2: Full Curated Installation**
+### Phase 2: PRD & Phase Configuration
 When the user switches to "Copilot Agentic Brain Installer" and provides their project idea:
-1. The installer collects the project idea/need from the user
-2. Writes a detailed PRD based on the idea
-3. Detects the repository profile (frontend/backend/fullstack/etc.)
-4. Curates appropriate agents from awesome-copilot-main (NOT pre-set)
-5. Curates instructions, hooks, workflows as needed
-6. Configures phases with detailed documentation
-7. Updates all memory files and documentation
-8. Runs a consistency sweep for errors and broken links
+1. Collect project idea/need from the user
+2. Write detailed PRD based on the idea
+3. Detect repository profile (frontend/backend/fullstack/etc.)
+4. Define phase structure based on PRD
+5. Configure each phase with README and checklist
+6. Update memory index and progress dashboard
+
+### Phase 3: Asset Selection & Import
+1. Copy core awesome-copilot subset to `.github/agentic_brain/vendor/awesome-copilot/`
+2. Select appropriate agents from vendor pool → copy to `.github/agents/`
+3. Select appropriate instructions → copy to appropriate `.github/` locations
+4. Select hooks → copy to `.github/hooks/`
+5. Select workflows → copy to `.github/workflows/`
+6. Select skills → copy to `.github/skills/`
+7. Document all selections
+8. Verify assets are in CORRECT VSCode-mandated locations
 
 **Key Principles:**
 - No pre-set agents in `.github_templates/agents/` — all agents are curated fresh per-project
 - The installer ALWAYS works OUTSIDE the Agentic Brain template folder
 - The installer continues until complete — only stops on blockers requiring user intervention
 - Every agent MUST load `.github/copilot-instructions.md` at startup (no exceptions)
+- Assets MUST go to VSCode-mandated locations: `.github/agents/`, `.github/hooks/`, `.github/workflows/`, `.github/skills/`
 
 ## Local Script Install (Deterministic)
 

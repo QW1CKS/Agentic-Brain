@@ -35,12 +35,15 @@ In a target repository (NOT in the Agentic Brain template folder), ask Copilot:
    - `.github/agent_memory/` (memory templates: 00_index.md, 01_decisions.md, etc.)
    - `.github/agentic_brain/` (empty folders for catalog and vendor assets)
    - `.github/agents/` (empty - will be populated by installer)
+   - `.github/hooks/` (empty - will be populated by installer)
+   - `.github/workflows/` (empty - will be populated by installer)
+   - `.github/skills/` (empty - will be populated by installer)
    - `AGENTS/` (placeholder phases: Active Phase, Progress Dashboard, phase folders)
    - `PRD_TEMPLATE.md` (will be filled in detail by installer)
 2. Copilot tells you to **switch to "Copilot Agentic Brain Installer"** agent
 3. **Do NOT work in the Agentic Brain template folder** - this scaffolding goes in your actual project repo
 
-### Phase 2: Full Curated Installation
+### Phase 2: PRD & Phase Configuration
 
 After switching to "Copilot Agentic Brain Installer" agent, provide your project idea/need:
 - What is your project called?
@@ -52,12 +55,24 @@ After switching to "Copilot Agentic Brain Installer" agent, provide your project
 **The installer will then:**
 1. Write a detailed PRD based on your idea
 2. Detect your repository profile (frontend/backend/fullstack/data/infra)
-3. **Curate agents** from awesome-copilot-main (NOT pre-set - picked fresh for your project)
-4. Curate instructions, hooks, workflows as needed
-5. Configure phases with detailed documentation
-6. Update all memory files
-7. Run a consistency sweep for errors and broken links
-8. Continue until complete - only stops on blockers needing your input
+3. Define phase structure based on PRD
+4. Configure each phase with README and checklist
+5. Update memory index and progress dashboard
+
+### Phase 3: Asset Selection & Import
+
+**This is where agents, hooks, instructions, workflows are actually installed:**
+
+1. Copy core awesome-copilot subset to `.github/agentic_brain/vendor/awesome-copilot/`
+2. Select appropriate agents from vendor pool → **copy to `.github/agents/`**
+3. Select instructions → copy to appropriate `.github/` locations
+4. Select hooks → **copy to `.github/hooks/`**
+5. Select workflows → **copy to `.github/workflows/`**
+6. Select skills → **copy to `.github/skills/`**
+7. Document all selections in `.github/agentic_brain/`
+8. Verify assets are in CORRECT VSCode-mandated locations
+
+**CRITICAL: Assets MUST go to VSCode-mandated locations, NOT arbitrary subfolders!**
 
 ## Script Install
 

@@ -32,7 +32,10 @@ When user intent is "install Agentic Brain" or equivalent:
 - Detect repository profile (frontend/backend/fullstack/data/infra).
 - Run the scaffolding script to create basic folder structure
 - Tell the user to switch to "Copilot Agentic Brain Installer" agent
-- The installer agent will then complete the full curated installation
+- The installer agent will then complete the 3-phase installation:
+  1. Phase 1: Scaffolding (already done)
+  2. Phase 2: PRD & Phase Configuration
+  3. Phase 3: Asset Selection & Import (agents → `.github/agents/`, hooks → `.github/hooks/`, workflows → `.github/workflows/`, skills → `.github/skills/`)
 
 Automatic trigger (chat-driven install)
 
@@ -45,7 +48,7 @@ Automatic trigger (chat-driven install)
 
 **CRITICAL: The scaffolding MUST go into the user's actual project repository, NOT into the Agentic Brain template folder. If you are inside the Agentic-Brain folder, navigate UP to the parent folder and use that as the target.**
 
-**IMPORTANT: The scaffolding script creates empty/placeholder folders. The actual curated agent selection happens via the "Copilot Agentic Brain Installer" agent - this is the key difference from the old flow.**
+**IMPORTANT: The scaffolding script creates empty/placeholder folders. The actual agent selection and installation happens via the "Copilot Agentic Brain Installer" agent in Phase 3 - assets MUST go to VSCode-mandated locations (`.github/agents/`, `.github/hooks/`, `.github/workflows/`, `.github/skills/`).**
 
 Notes:
 - The assistant must never write to `.github_templates/` — only to the target repository (workspace root).
