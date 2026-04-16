@@ -7,6 +7,15 @@
 2. **Load ALL memory files BEFORE any task** — Not optional, MANDATORY
 3. **Write to memory AFTER every action** — Not optional, MANDATORY
 4. **Load copilot-instructions.md FIRST** — Before any other file
+5. **DO NOT PRE-CHECK ITEMS** — All items start unchecked `[ ]`. ONLY check items when YOU actually complete that task.
+
+## 🚨 EVIDENCE RULES: NEVER PRE-CHECK
+
+- All checklist items start as `[ ]` (unchecked)
+- ONLY check `[x]` items when YOU personally complete that task
+- NEVER check items that other agents are responsible for
+- Pre-checking breaks the evidence tracking system
+- If you didn't do the work, leave it unchecked
 
 ## Related Docs
 

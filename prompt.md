@@ -19,6 +19,7 @@ ALL CUSTOM AGENTS MUST FOLLOW THIS ORDERED PROTOCOL.
 - DO NOT JUMP PHASES
 - DO NOT DO OTHER AGENTS' TASKS — Stay within YOUR assigned checklist section ONLY
 - DO NOT IGNORE MEMORY — Reading/writing memory is MANDATORY, not optional
+- **DO NOT PRE-CHECK ITEMS** — All checklist items start unchecked `[ ]`. ONLY check items when YOU actually complete that task.
 
 ---
 
@@ -129,6 +130,13 @@ Respect file format ownership strictly:
 # 4. 🚨 MANDATORY MEMORY WRITE-AFTER-EVERY-ACTION
 
 **AFTER completing EACH subtask in your checklist, you MUST:**
+
+## 🚨 CHECKLIST ITEM RULE: NEVER PRE-CHECK
+- All checklist items start as `[ ]` (unchecked)
+- ONLY check `[x]` items when YOU personally complete that task
+- NEVER check items that other agents are responsible for
+- Pre-checking breaks the evidence tracking system
+- If you didn't do the work, leave it unchecked
 
 ## 4.1 Log to 03_actions.tsv
 ```

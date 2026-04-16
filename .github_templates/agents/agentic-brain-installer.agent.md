@@ -353,6 +353,12 @@ The CHECKLIST.md should ONLY list:
 
 **DO NOT add specific development agents to the checklist** - those will be added in Phase 3 when assets are actually imported.
 
+**🚨 CRITICAL: DO NOT CHECK ANY ITEMS**
+- The checklist template starts with ALL items UNCHECKED `[ ]`
+- NEVER pre-check items `[x]` during installation
+- ONLY the actual assigned agent can check items when they complete their work
+- Pre-checking items will break the evidence tracking system
+
 ### 2.4 Update Active Phase
 Set the first phase in `AGENTS/ACTIVE_PHASE.md`
 

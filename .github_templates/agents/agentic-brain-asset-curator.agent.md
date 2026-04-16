@@ -279,6 +279,12 @@ Also update these sections in README:
 
 **FOLLOW THE EXACT TEMPLATE STRUCTURE** from `AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md`.
 
+**🚨 CRITICAL: DO NOT CHECK ANY ITEMS**
+- All new checklist items must start UNCHECKED `[ ]`
+- NEVER pre-check items `[x]` during curation
+- ONLY the actual assigned agent can check items when they complete their work
+- Pre-checking items will break the evidence tracking system
+
 For EACH selected agent, you MUST add a complete section following this exact format:
 
 ```markdown
