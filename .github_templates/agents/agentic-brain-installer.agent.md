@@ -35,6 +35,8 @@ BEFORE doing anything else, perform these steps in exact order:
    - `AGENTS/PROGRESS_DASHBOARD.md`
    - `PRD_TEMPLATE.md`
 
+---
+
 ## Phase 1: Project Idea & PRD Configuration
 
 ### 1.1 Collect Project Idea
@@ -55,7 +57,9 @@ Based on the user's idea, create a comprehensive PRD in `PRD_TEMPLATE.md`:
 - **Non-Functional Requirements:** Performance, security, scalability
 - **Milestones:** Phase-based delivery plan
 
-## Phase 2: Curate Agents, Instructions, Hooks
+---
+
+## Phase 2: Configure Phases & Documentation
 
 ### 2.1 Detect Repository Profile
 Analyze the target repository to detect its profile:
@@ -63,45 +67,14 @@ Analyze the target repository to detect its profile:
 - Detect frontend (React, Vue, Angular), backend (Node, Python, Go), etc.
 - Determine if it's fullstack, data, infrastructure, etc.
 
-### 2.2 Select Appropriate Agents
-Reference the awesome-copilot-main agents folder to select:
-- **Required:** Always include `agents-orchestrator.agent.md` for workflow control
-- **Architect:** Select based on project type (e.g., `api-architect.agent.md`, `software-architect.agent.md`)
-- **Developer:** Select based on tech stack (e.g., `expert-react-frontend-engineer.agent.md`, `expert-nextjs-developer.agent.md`)
-- **DevOps:** If infrastructure needed (e.g., `devops-expert.agent.md`, `github-actions-expert.agent.md`)
-- **Security:** If sensitive data (e.g., `security-engineer.agent.md`)
-- **Testing:** Always include appropriate testers
-
-**Document selection in:** `.github/agentic_brain/selected-agents.md`
-
-### 2.3 Select Instructions
-From awesome-copilot-main instructions, select:
-- Memory bank instructions
-- Code review instructions
-- Testing guidelines
-- Documentation standards
-
-**Document selection in:** `.github/agentic_brain/selected-instructions.md`
-
-### 2.4 Select Hooks
-If applicable, select pre-commit, CI/CD hooks from awesome-copilot-main/hooks/
-
-### 2.5 Select Workflows
-If applicable, select relevant workflows from awesome-copilot-main/workflows/
-
-### 2.6 Import Selected Assets
-Copy the selected agents, instructions, hooks to the appropriate locations in `.github/`
-
-## Phase 3: Configure Phases
-
-### 3.1 Define Phase Structure
+### 2.2 Define Phase Structure
 Based on the PRD, define appropriate phases. Default structure:
 - **Phase 1 - Foundation:** Setup, architecture, core infrastructure
 - **Phase 2 - Implementation:** Feature development
 - **Phase 3 - Testing:** QA, testing, bug fixing
 - **Phase 4 - Deployment:** Release, monitoring, maintenance
 
-### 3.2 Configure Each Phase
+### 2.3 Configure Each Phase
 For each phase, create/update:
 - `AGENTS/<Phase Name>/README.md` with:
   - Goal for the phase
@@ -111,53 +84,112 @@ For each phase, create/update:
   - Required artifacts
 - `AGENTS/<Phase Name>/CHECKLIST.md` with specific tasks
 
-### 3.3 Update Active Phase
+### 2.4 Update Active Phase
 Set the first phase in `AGENTS/ACTIVE_PHASE.md`
 
-## Phase 4: Configure Documentation
-
-### 4.1 Update Memory Index
+### 2.5 Update Memory Index
 Update `.github/agent_memory/00_index.md` with:
 - Project name from PRD
 - Created date
 - Current phase
 
-### 4.2 Update Progress Dashboard
+### 2.6 Update Progress Dashboard
 Update `AGENTS/PROGRESS_DASHBOARD.md` with:
 - Project name
 - Phase structure
 - Initial metrics
 
-### 4.3 Create Required Custom Agents Document
-Create `AGENTS/REQUIRED_CUSTOM_AGENTS.md` documenting:
-- All selected agents with purpose
-- Agent matrix with source, reason, tools, applies-to
-- Excluded candidates with reasoning
+---
 
-## Phase 5: Consistency Sweep
+## Phase 3: Select & Import Assets from Awesome-Copilot-Main
 
-### 5.1 Validate All Links
-- Check all markdown links in documentation
-- Verify file paths exist
-- Ensure cross-references are valid
+**THIS IS THE CRITICAL PHASE - Assets MUST go to the CORRECT VSCode/Copilot-mandated locations.**
 
-### 5.2 Check for Errors
-- Verify no placeholder `<...>` tokens remain uncured
-- Check TSV files have proper headers
-- Validate YAML catalog if created
+### 3.1 Correct Folder Locations (VSCode/Copilot Mandated)
 
-### 5.3 Memory Health Check
-- Ensure all required memory files exist
-- Verify append-only structure is in place
+The selected assets MUST be placed in these EXACT locations:
 
-### 5.4 Report
-Present a summary of:
-- PRD configured with X features
-- X agents selected
-- X instructions selected
-- X hooks/workflows selected
-- Phases configured
-- Any issues found
+| Asset Type | Correct Location | Notes |
+|------------|-----------------|-------|
+| Custom Agents | `.github/agents/*.agent.md` | **NOT** `.github/agentic_brain/agents/` |
+| Global Instructions | `.github/copilot-instructions.md` | Single file, not a folder |
+| Hooks | `.github/hooks/` | For pre-commit, CI/CD hooks |
+| Workflows | `.github/workflows/` | For GitHub Actions workflows |
+| Skills | `.github/skills/` | For custom skills |
+
+**IMPORTANT: Do NOT put agents in arbitrary subfolders like `.github/agentic_brain/agents/` - VSCode/Copilot will NOT recognize them there.**
+
+### 3.2 Copy Core Awesome-Copilot Subset First
+
+Before selecting specific assets, copy the core awesome-copilot subset to vendor folder:
+```
+.github/agentic_brain/vendor/awesome-copilot/
+├── agents/       (all agent files)
+├── instructions/ (all instruction files)
+├── hooks/       (all hook files)
+├── workflows/  (all workflow files)
+├── skills/      (all skill files)
+├── plugins/     (all plugin files)
+├── LICENSE
+└── README.md
+```
+
+This is the "pool" to select from - DO NOT directly use awesome-copilot-main as the source.
+
+### 3.3 Select and Copy Agents
+
+From `.github/agentic_brain/vendor/awesome-copilot/agents/` select appropriate agents:
+- **Required:** Always select a workflow orchestrator agent
+- **Architect:** Select based on project type (e.g., `api-architect.agent.md`, `software-architect.agent.md`)
+- **Developer:** Select based on tech stack (e.g., `expert-react-frontend-engineer.agent.md`, `expert-nextjs-developer.agent.md`)
+- **DevOps:** If infrastructure needed (e.g., `devops-expert.agent.md`, `github-actions-expert.agent.md`)
+- **Security:** If sensitive data (e.g., `security-engineer.agent.md`)
+- **Testing:** Always select appropriate testers
+
+**Copy to:** `.github/agents/<selected-agent-name>.agent.md`
+
+### 3.4 Select and Copy Instructions
+
+From `.github/agentic_brain/vendor/awesome-copilot/instructions/` select:
+- Memory bank instructions (if applicable)
+- Code review instructions
+- Testing guidelines
+- Documentation standards
+
+**Copy to:** Individual files in `.github/` as appropriate (e.g., `.github/copilot-instructions.md` for global instructions)
+
+### 3.5 Select and Copy Hooks
+
+From `.github/agentic_brain/vendor/awesome-copilot/hooks/` select relevant hooks:
+- Pre-commit hooks
+- CI/CD hooks
+
+**Copy to:** `.github/hooks/<hook-name>`
+
+### 3.6 Select and Copy Workflows
+
+From `.github/agentic_brain/vendor/awesome-copilot/workflows/` select relevant workflows:
+- GitHub Actions workflows
+
+**Copy to:** `.github/workflows/<workflow-name>.yml`
+
+### 3.7 Document Selection
+
+Create these documentation files:
+- `.github/agentic_brain/selected-agents.md` - List of selected agents with purpose
+- `.github/agentic_brain/selected-instructions.md` - List of selected instructions
+- `.github/agentic_brain/selected-hooks.md` - List of selected hooks
+- `.github/agentic_brain/selected-workflows.md` - List of selected workflows
+
+### 3.8 Verify Assets Are in Correct Locations
+
+After copying, verify:
+- All `.agent.md` files are in `.github/agents/` (NOT in subfolders)
+- All hooks are in `.github/hooks/`
+- All workflows are in `.github/workflows/`
+- Global instructions in `.github/copilot-instructions.md`
+
+---
 
 ## Memory Write Requirements
 
@@ -173,24 +205,30 @@ After completing each phase, write to memory:
 4. **04_blockers.md:** Update if any blockers encountered
 5. **05_handoffs.tsv:** If switching context/agent
 
+---
+
 ## Continuation Requirements
 
 **THIS AGENT MUST CONTINUE UNTIL INSTALLATION IS COMPLETE.**
 
 - Do NOT stop after partial completion
-- Complete all 5 phases before finishing
+- Complete all 3 phases before finishing
 - Only stop if there's a blocker that requires user intervention
 - If blocked, clearly document what is needed from the user
 
+---
+
 ## Error Handling
 
-- If a selected agent file is missing, log a warning but continue
-- If placeholder substitution fails, report it clearly to the user
+- If a selected asset file is missing from vendor, log a warning but continue with other assets
 - If copy operations fail, report the error with path details
+- ALWAYS verify assets end up in the CORRECT locations (not made-up locations)
+
+---
 
 ## Important Notes
 
-- ALWAYS copy `.github/copilot-instructions.md` to `.github/copilot-instructions.md` (this is critical)
-- The `.github/agentic_brain/vendor/awesome-copilot/` folder should already have the core subset from the scaffolding or should be populated now
-- Use the awesome-copilot-main source files as reference for curation
+- ALWAYS load `.github/copilot-instructions.md` at startup - no exceptions
+- Use the vendor folder `.github/agentic_brain/vendor/awesome-copilot/` as the source for selection
 - After installation, the user should be able to start working with Copilot in phase-driven mode
+- **The key difference**: Phase 3 is where you ACTUALLY copy assets to the correct VSCode-mandated locations
