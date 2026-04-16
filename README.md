@@ -92,10 +92,11 @@ When the user says "Install Agentic Brain for this repository", Copilot will:
 When the user switches to "Copilot Agentic Brain Installer" and provides their project idea:
 1. Collect project idea/need from the user
 2. Write detailed PRD based on the idea
-3. Detect repository profile (frontend/backend/fullstack/etc.)
-4. Define phase structure based on PRD
-5. Configure each phase with README and checklist
-6. Update memory index and progress dashboard
+3. **Copy this agent to `.github/agents/agentic-brain-installer.agent.md`** (CRITICAL - makes it available for future use)
+4. Detect repository profile (frontend/backend/fullstack/etc.)
+5. Define phase structure based on PRD
+6. Configure each phase with README and checklist
+7. Update memory index and progress dashboard
 
 ### Phase 3: Asset Selection & Import
 1. Copy core awesome-copilot subset to `.github/agentic_brain/vendor/awesome-copilot/`

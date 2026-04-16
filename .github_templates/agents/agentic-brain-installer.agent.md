@@ -57,6 +57,20 @@ Based on the user's idea, create a comprehensive PRD in `PRD_TEMPLATE.md`:
 - **Non-Functional Requirements:** Performance, security, scalability
 - **Milestones:** Phase-based delivery plan
 
+### 1.3 Copy This Agent to .github/agents/ (CRITICAL)
+**CRITICAL STEP: After collecting the project idea and writing the PRD, you MUST copy this agent file to `.github/agents/agentic-brain-installer.agent.md`.**
+
+This step is REQUIRED because:
+1. Without copying, the user cannot switch to "Copilot Agentic Brain Installer" in future sessions
+2. This agent must be persisted in the repo to be available in VSCode/Copilot's agent list
+
+**How to copy:**
+- Read this current agent file content
+- Write it to `.github/agents/agentic-brain-installer.agent.md`
+- This makes it a selectable custom agent in VSCode
+
+**This must be done in Phase 1 before moving to Phase 2.**
+
 ---
 
 ## Phase 2: Configure Phases & Documentation
@@ -146,7 +160,11 @@ From `.github/agentic_brain/vendor/awesome-copilot/agents/` select appropriate a
 - **Security:** If sensitive data (e.g., `security-engineer.agent.md`)
 - **Testing:** Always select appropriate testers
 
+**IMPORTANT: Also copy THIS agent (agentic-brain-installer.agent.md) to `.github/agents/` so the user can switch to "Copilot Agentic Brain Installer" for Phase 2.**
+
 **Copy to:** `.github/agents/<selected-agent-name>.agent.md`
+
+**CRITICAL: This agent itself must be copied to `.github/agents/agentic-brain-installer.agent.md` so it becomes available as a custom agent in VSCode/Copilot.**
 
 ### 3.4 Select and Copy Instructions
 

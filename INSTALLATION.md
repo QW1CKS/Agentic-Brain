@@ -54,10 +54,11 @@ After switching to "Copilot Agentic Brain Installer" agent, provide your project
 
 **The installer will then:**
 1. Write a detailed PRD based on your idea
-2. Detect your repository profile (frontend/backend/fullstack/data/infra)
-3. Define phase structure based on PRD
-4. Configure each phase with README and checklist
-5. Update memory index and progress dashboard
+2. **Copy this agent to `.github/agents/agentic-brain-installer.agent.md`** (CRITICAL - makes it available for future sessions)
+3. Detect your repository profile (frontend/backend/fullstack/data/infra)
+4. Define phase structure based on PRD
+5. Configure each phase with README and checklist
+6. Update memory index and progress dashboard
 
 ### Phase 3: Asset Selection & Import
 
