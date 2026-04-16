@@ -71,7 +71,7 @@ const memoryTemplates = {
 - [Copilot Instructions](../.github/copilot-instructions.md)
 - [Active Phase](../AGENTS/ACTIVE_PHASE.md)
 - [Progress Dashboard](../AGENTS/PROGRESS_DASHBOARD.md)
-- [PRD](../PRD_TEMPLATE.md)
+- [PRD](../PRD.md)
 
 ## Memory Structure
 | File | Purpose |
@@ -416,14 +416,16 @@ Phase structure:
   console.log(`  Created: AGENTS/ (minimal placeholder - detailed config in Phase 2)`);
 
   // 6. PRD.md (copy from template, rename to PRD.md)
-  const prdTemplateSrc = path.join(process.cwd(), "PRD_TEMPLATE.md");
+  const prdTemplateSrc = path.join(templateRoot, "PRD_TEMPLATE.md");
   const prdDest = path.join(targetRoot, "PRD.md");
   if (!dryRun) {
     if (fs.existsSync(prdTemplateSrc)) {
       copyRecursive(prdTemplateSrc, prdDest);
+      console.log(`  Created: PRD.md`);
+    } else {
+      console.log(`  WARNING: PRD_TEMPLATE.md not found at ${prdTemplateSrc}`);
     }
   }
-  console.log(`  Created: PRD.md`);
 
   console.log("\nScaffolding complete!");
   console.log("\nNext steps:");
