@@ -41,12 +41,13 @@ Your job is to set up the infrastructure only:
 
 ---
 
-## Phase 3: Copy Assets (File Copy Only - User-Driven)
+## Phase 3: Asset Curation (Handoff to Specialist Agent)
 
-3.1 **Ask user what they need** - wait for their response
-3.2 After user selection, copy only what they request → `.github/agents/`, `.github/hooks/`, `.github/workflows/`
+3.1 Copy the Asset Curator agent to `.github/agents/agentic-brain-asset-curator.agent.md`
+3.2 Tell user to switch to "Agentic Brain Asset Curator" agent
+3.3 The Asset Curator will analyze PRD and select appropriate assets
 
-**Output:** Copied files only (user-selected). No auto-copying, no features.
+**Output:** Handoff to Phase 3 agent. No asset copying by installer.
 
 ---
 
@@ -191,52 +192,22 @@ Update `AGENTS/PROGRESS_DASHBOARD.md` with:
 
 ---
 
-## Phase 3: Select & Import Assets from Awesome-Copilot-Main
+## Phase 3: Asset Curation (Hand off to Asset Curator Agent)
 
-**⚠️ CRITICAL: THIS PHASE IS USER-DRIVEN - YOU DO NOT AUTO-SELECT AGENTS.**
+This phase is handled by a **separate specialized agent**: `agentic-brain-asset-curator.agent.md`
 
-This is NOT an automatic feature installation phase. You must:
-1. Ask the user what they need (developer agents, architecture, testing, etc.)
-2. Present options from the awesome-copilot catalog
-3. Let the USER select what they want
-4. Copy only what the user explicitly requests
+Your job in this phase is to:
+1. Copy the Asset Curator agent to `.github/agents/agentic-brain-asset-curator.agent.md`
+2. Tell the user to switch to "Agentic Brain Asset Curator" agent
+3. The Asset Curator will:
+   - Read PRD.md to understand project requirements
+   - Analyze tech stack and feature needs
+   - Browse awesome-copilot vendor folder
+   - Select appropriate agents, hooks, workflows, skills
+   - Copy to correct VSCode-mandated locations
+   - Update phase documentation with selections
 
-**DO NOT:**
-- ❌ Auto-scan and copy agents without user permission
-- ❌ Implement features based on PRD
-- ❌ Generate code or project structure
-
-**DO:**
-- ✅ Ask: "What type of agents do you need for this project?"
-- ✅ Show available options from awesome-copilot
-- ✅ Copy only user-selected assets to correct VSCode locations
-
-### 3.1 Ask User What They Need
-
-**Ask the user explicitly:** "What type of agents/hooks/workflows do you need for this project?"
-
-Present categories:
-- Workflow orchestration (agents-orchestrator, project-manager)
-- Architecture (api-architect, software-architect, azure-architect)
-- Development (based on their tech stack - react, nextjs, python, etc.)
-- Testing (qa-engineer, test-automation)
-- DevOps (github-actions-expert, devops-expert)
-
-Wait for user response before proceeding.
-
-### 3.2 After User Selection - Copy Only What They Request
-
-Once user specifies what they want:
-1. Copy only the selected agents to `.github/agents/`
-2. Copy only the selected hooks to `.github/hooks/`
-3. Copy only the selected workflows to `.github/workflows/`
-4. Copy only the selected instructions to `.github/`
-
-**Do NOT copy anything the user didn't explicitly request.**
-
-### 3.3 Document Selection (Minimal)
-
-Just note what was selected in a simple list - no need for detailed documentation files.
+**DO NOT attempt to do asset selection yourself - use the specialized agent.**
 
 ---
 
