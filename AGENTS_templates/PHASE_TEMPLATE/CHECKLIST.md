@@ -4,7 +4,7 @@
 
 - Overview: [../../README.md](../../README.md)
 - Installation guide: [../../INSTALLATION.md](../../INSTALLATION.md)
-- Product requirements template: [../../PRD_TEMPLATE.md](../../PRD_TEMPLATE.md)
+- Product requirements template: [../../PRD.md](../../PRD.md)
 - Universal execution protocol: [../../prompt.md](../../prompt.md)
 - Copilot workflow contract template: [../../.github_templates/copilot-instructions.md](../../.github_templates/copilot-instructions.md)
 - Active phase state template: [../ACTIVE_PHASE.md](../ACTIVE_PHASE.md)

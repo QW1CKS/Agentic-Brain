@@ -98,15 +98,15 @@ When the user switches to "Copilot Agentic Brain Installer" and provides their p
 6. Configure each phase with README and checklist
 7. Update memory index and progress dashboard
 
-### Phase 3: Asset Selection & Import
-1. Copy core awesome-copilot subset to `.github/agentic_brain/vendor/awesome-copilot/`
-2. Select appropriate agents from vendor pool → copy to `.github/agents/`
-3. Select appropriate instructions → copy to appropriate `.github/` locations
-4. Select hooks → copy to `.github/hooks/`
-5. Select workflows → copy to `.github/workflows/`
-6. Select skills → copy to `.github/skills/`
-7. Document all selections
-8. Verify assets are in CORRECT VSCode-mandated locations
+### Phase 3: Asset Selection & Import (User-Driven)
+1. **Ask user what they need** - wait for their response
+2. After user selection, copy only what they request:
+   - Selected agents → `.github/agents/`
+   - Selected instructions → appropriate `.github/` locations
+   - Selected hooks → `.github/hooks/`
+   - Selected workflows → `.github/workflows/`
+   - Selected skills → `.github/skills/`
+3. Verify assets are in CORRECT VSCode-mandated locations
 
 **Key Principles:**
 - No pre-set agents in `.github_templates/agents/` — all agents are curated fresh per-project

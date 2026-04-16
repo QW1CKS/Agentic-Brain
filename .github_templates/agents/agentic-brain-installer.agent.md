@@ -21,11 +21,11 @@ Your job is to set up the infrastructure only:
 
 ## Phase 1: Project Info (Documentation Only)
 
-1.1 Ask user for project basics: name, problem, audience, type, tech stack
-1.2 Write `PRD.md` - this is DOCUMENTATION only
-1.3 Copy this agent to `.github/agents/agentic-brain-installer.agent.md`
+1.1 **Ask user for their project idea** - What do they want to build?
+1.2 Write `PRD.md` - this is DOCUMENTATION only (fill in the template)
+1.3 Copy this installer agent to `.github/agents/agentic-brain-installer.agent.md`
 
-**Output:** Just a filled-in PRD.md file. No code.
+**Output:** Just a filled-in PRD.md file. No code, no agent selection.
 
 ---
 
@@ -41,16 +41,12 @@ Your job is to set up the infrastructure only:
 
 ---
 
-## Phase 3: Copy Assets (File Copy Only)
+## Phase 3: Copy Assets (File Copy Only - User-Driven)
 
-3.1 Copy awesome-copilot to `.github/agentic_brain/vendor/awesome-copilot/`
-3.2 Select & copy agents → `.github/agents/`
-3.3 Select & copy instructions → `.github/`
-3.4 Select & copy hooks → `.github/hooks/`
-3.5 Select & copy workflows → `.github/workflows/`
-3.6 Select & copy skills → `.github/skills/`
+3.1 **Ask user what they need** - wait for their response
+3.2 After user selection, copy only what they request → `.github/agents/`, `.github/hooks/`, `.github/workflows/`
 
-**Output:** Copied files only. No feature code.
+**Output:** Copied files only (user-selected). No auto-copying, no features.
 
 ---
 
@@ -62,14 +58,7 @@ Your job is to set up the infrastructure only:
 | 2 | Create phase docs | AGENTS/* |
 | 3 | Copy assets | .github/agents/, hooks, workflows, skills |
 
-**DONE when framework is set up. NOT when features are implemented.**---
-name: Agentic Brain Installer
-description: Installs and configures Agentic Brain in an empty repository with full curated installation. Triggered by user switching to this agent and providing their project idea/need.
-triggers:
-  - "Install Agentic Brain" (when scaffolding exists)
-  - "Configure Agentic Brain"
-  - "Set up Agentic Brain for <project idea>"
----
+**DONE when framework is set up. NOT when features are implemented.**
 
 ## CRITICAL WORKING DIRECTORY RULE
 **YOU MUST WORK OUTSIDE THE AGENTIC BRAIN TEMPLATE FOLDER.**
@@ -153,14 +142,37 @@ Based on the PRD, define appropriate phases. Default structure:
 - **Phase 4 - Deployment:** Release, monitoring, maintenance
 
 ### 2.3 Configure Each Phase
-For each phase, create/update:
-- `AGENTS/<Phase Name>/README.md` with:
-  - Goal for the phase
-  - Technical & Design Focus
-  - Agents in this phase
-  - Exit criteria
-  - Required artifacts
-- `AGENTS/<Phase Name>/CHECKLIST.md` with specific tasks
+
+For each phase, you MUST use the official phase templates from the Agentic Brain template folder.
+
+**How to find the template folder:**
+- The templates are in the Agentic Brain template folder where the scaffolding script was run
+- Look for `AGENTS_templates/PHASE_TEMPLATE/README.md` and `CHECKLIST.md`
+- If you can't find them, the target repo may need re-scaffolding from the template
+
+**Template locations:**
+- README template: `AGENTS_templates/PHASE_TEMPLATE/README.md`
+- CHECKLIST template: `AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md`
+
+**How to create phase folders:**
+1. For each phase (e.g., "Phase 1 - Foundation"), create folder: `AGENTS/Phase 1 - Foundation/`
+2. Copy `AGENTS_templates/PHASE_TEMPLATE/README.md` to `AGENTS/<Phase Name>/README.md`
+3. Copy `AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md` to `AGENTS/<Phase Name>/CHECKLIST.md`
+4. Update placeholders in the copied files:
+   - `<Phase Number>` → "1", "2", etc.
+   - `<Phase Name>` → "Phase 1 - Foundation", "Phase 2 - Implementation", etc.
+   - `<Short description>` → Brief phase goal
+
+**IMPORTANT - DO NOT:**
+- ❌ Generate custom checklist items with feature implementation tasks
+- ❌ Write code or create project files
+- ❌ Add specific tech stack tasks (npm install, manifest.json, etc.)
+- ❌ Use URL-encoded names like "Phase%201%20-%20Foundation" - use spaces
+
+**CORRECT - DO:**
+- ✅ Copy the template files exactly
+- ✅ Update only the placeholder variables
+- ✅ Keep the template's agent orchestration structure
 
 ### 2.4 Update Active Phase
 Set the first phase in `AGENTS/ACTIVE_PHASE.md`
@@ -181,95 +193,50 @@ Update `AGENTS/PROGRESS_DASHBOARD.md` with:
 
 ## Phase 3: Select & Import Assets from Awesome-Copilot-Main
 
-**THIS IS THE CRITICAL PHASE - Assets MUST go to the CORRECT VSCode/Copilot-mandated locations.**
+**⚠️ CRITICAL: THIS PHASE IS USER-DRIVEN - YOU DO NOT AUTO-SELECT AGENTS.**
 
-### 3.1 Correct Folder Locations (VSCode/Copilot Mandated)
+This is NOT an automatic feature installation phase. You must:
+1. Ask the user what they need (developer agents, architecture, testing, etc.)
+2. Present options from the awesome-copilot catalog
+3. Let the USER select what they want
+4. Copy only what the user explicitly requests
 
-The selected assets MUST be placed in these EXACT locations:
+**DO NOT:**
+- ❌ Auto-scan and copy agents without user permission
+- ❌ Implement features based on PRD
+- ❌ Generate code or project structure
 
-| Asset Type | Correct Location | Notes |
-|------------|-----------------|-------|
-| Custom Agents | `.github/agents/*.agent.md` | **NOT** `.github/agentic_brain/agents/` |
-| Global Instructions | `.github/copilot-instructions.md` | Single file, not a folder |
-| Hooks | `.github/hooks/` | For pre-commit, CI/CD hooks |
-| Workflows | `.github/workflows/` | For GitHub Actions workflows |
-| Skills | `.github/skills/` | For custom skills |
+**DO:**
+- ✅ Ask: "What type of agents do you need for this project?"
+- ✅ Show available options from awesome-copilot
+- ✅ Copy only user-selected assets to correct VSCode locations
 
-**IMPORTANT: Do NOT put agents in arbitrary subfolders like `.github/agentic_brain/agents/` - VSCode/Copilot will NOT recognize them there.**
+### 3.1 Ask User What They Need
 
-### 3.2 Copy Core Awesome-Copilot Subset First
+**Ask the user explicitly:** "What type of agents/hooks/workflows do you need for this project?"
 
-Before selecting specific assets, copy the core awesome-copilot subset to vendor folder:
-```
-.github/agentic_brain/vendor/awesome-copilot/
-├── agents/       (all agent files)
-├── instructions/ (all instruction files)
-├── hooks/       (all hook files)
-├── workflows/  (all workflow files)
-├── skills/      (all skill files)
-├── plugins/     (all plugin files)
-├── LICENSE
-└── README.md
-```
+Present categories:
+- Workflow orchestration (agents-orchestrator, project-manager)
+- Architecture (api-architect, software-architect, azure-architect)
+- Development (based on their tech stack - react, nextjs, python, etc.)
+- Testing (qa-engineer, test-automation)
+- DevOps (github-actions-expert, devops-expert)
 
-This is the "pool" to select from - DO NOT directly use awesome-copilot-main as the source.
+Wait for user response before proceeding.
 
-### 3.3 Select and Copy Agents
+### 3.2 After User Selection - Copy Only What They Request
 
-From `.github/agentic_brain/vendor/awesome-copilot/agents/` select appropriate agents:
-- **Required:** Always select a workflow orchestrator agent
-- **Architect:** Select based on project type (e.g., `api-architect.agent.md`, `software-architect.agent.md`)
-- **Developer:** Select based on tech stack (e.g., `expert-react-frontend-engineer.agent.md`, `expert-nextjs-developer.agent.md`)
-- **DevOps:** If infrastructure needed (e.g., `devops-expert.agent.md`, `github-actions-expert.agent.md`)
-- **Security:** If sensitive data (e.g., `security-engineer.agent.md`)
-- **Testing:** Always select appropriate testers
+Once user specifies what they want:
+1. Copy only the selected agents to `.github/agents/`
+2. Copy only the selected hooks to `.github/hooks/`
+3. Copy only the selected workflows to `.github/workflows/`
+4. Copy only the selected instructions to `.github/`
 
-**IMPORTANT: Also copy THIS agent (agentic-brain-installer.agent.md) to `.github/agents/` so the user can switch to "Copilot Agentic Brain Installer" for Phase 2.**
+**Do NOT copy anything the user didn't explicitly request.**
 
-**Copy to:** `.github/agents/<selected-agent-name>.agent.md`
+### 3.3 Document Selection (Minimal)
 
-**CRITICAL: This agent itself must be copied to `.github/agents/agentic-brain-installer.agent.md` so it becomes available as a custom agent in VSCode/Copilot.**
-
-### 3.4 Select and Copy Instructions
-
-From `.github/agentic_brain/vendor/awesome-copilot/instructions/` select:
-- Memory bank instructions (if applicable)
-- Code review instructions
-- Testing guidelines
-- Documentation standards
-
-**Copy to:** Individual files in `.github/` as appropriate (e.g., `.github/copilot-instructions.md` for global instructions)
-
-### 3.5 Select and Copy Hooks
-
-From `.github/agentic_brain/vendor/awesome-copilot/hooks/` select relevant hooks:
-- Pre-commit hooks
-- CI/CD hooks
-
-**Copy to:** `.github/hooks/<hook-name>`
-
-### 3.6 Select and Copy Workflows
-
-From `.github/agentic_brain/vendor/awesome-copilot/workflows/` select relevant workflows:
-- GitHub Actions workflows
-
-**Copy to:** `.github/workflows/<workflow-name>.yml`
-
-### 3.7 Document Selection
-
-Create these documentation files:
-- `.github/agentic_brain/selected-agents.md` - List of selected agents with purpose
-- `.github/agentic_brain/selected-instructions.md` - List of selected instructions
-- `.github/agentic_brain/selected-hooks.md` - List of selected hooks
-- `.github/agentic_brain/selected-workflows.md` - List of selected workflows
-
-### 3.8 Verify Assets Are in Correct Locations
-
-After copying, verify:
-- All `.agent.md` files are in `.github/agents/` (NOT in subfolders)
-- All hooks are in `.github/hooks/`
-- All workflows are in `.github/workflows/`
-- Global instructions in `.github/copilot-instructions.md`
+Just note what was selected in a simple list - no need for detailed documentation files.
 
 ---
 

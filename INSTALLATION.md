@@ -11,9 +11,9 @@
 - Phase README template: [AGENTS_templates/PHASE_TEMPLATE/README.md](AGENTS_templates/PHASE_TEMPLATE/README.md)
 - Phase checklist template: [AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md](AGENTS_templates/PHASE_TEMPLATE/CHECKLIST.md)
 
-## Two-Phase Installation
+## Three-Phase Installation
 
-Agentic Brain uses a two-phase installation to ensure proper curation of agents, instructions, and hooks based on your specific project needs.
+Agentic Brain uses a three-phase installation to ensure proper curation of agents, instructions, and hooks based on your specific project needs.
 
 ### ⚠️ CRITICAL: Where to Install
 
@@ -60,20 +60,20 @@ After switching to "Copilot Agentic Brain Installer" agent, provide your project
 5. Configure each phase with README and checklist
 6. Update memory index and progress dashboard
 
-### Phase 3: Asset Selection & Import
+### Phase 3: Asset Selection & Import (User-Driven)
 
-**This is where agents, hooks, instructions, workflows are actually installed:**
+**This is where agents, hooks, instructions, workflows are actually installed - but YOU choose what you need:**
 
-1. Copy core awesome-copilot subset to `.github/agentic_brain/vendor/awesome-copilot/`
-2. Select appropriate agents from vendor pool → **copy to `.github/agents/`**
-3. Select instructions → copy to appropriate `.github/` locations
-4. Select hooks → **copy to `.github/hooks/`**
-5. Select workflows → **copy to `.github/workflows/`**
-6. Select skills → **copy to `.github/skills/`**
-7. Document all selections in `.github/agentic_brain/`
-8. Verify assets are in CORRECT VSCode-mandated locations
+1. **Ask user what they need** - wait for their response about agent types
+2. After user selection, copy only what they explicitly request:
+   - Selected agents → **`.github/agents/`**
+   - Selected instructions → appropriate `.github/` locations
+   - Selected hooks → **`.github/hooks/`**
+   - Selected workflows → **`.github/workflows/`**
+   - Selected skills → **`.github/skills/`**
+3. Verify assets are in CORRECT VSCode-mandated locations
 
-**CRITICAL: Assets MUST go to VSCode-mandated locations, NOT arbitrary subfolders!**
+**⚠️ IMPORTANT: This phase is user-driven. Do NOT auto-select or auto-copy assets without user permission.**
 
 ## Script Install
 
