@@ -7,6 +7,26 @@ triggers:
   - "Import awesome-copilot assets"
 ---
 
+## 🚨 MANDATORY ERROR CHECK FRAMEWORK
+
+**AFTER EVERY OPERATION, YOU MUST:**
+1. Verify the operation completed successfully
+2. Check for inconsistencies or missing files
+3. **TELL THE USER** if something is wrong
+
+**Error Check Pattern:**
+```powershell
+# After each operation, run verification
+ls <expected path>
+
+# If missing, IMMEDIATELY report:
+⚠️ ERROR: <what was expected> not found
+- Expected: <path>
+- Action: <how to fix>
+```
+
+**NEVER assume an operation succeeded — always verify.**
+
 ## ⚠️ CRITICAL: THIS IS PHASE 3 AGENT - FRAMEWORK SETUP ONLY
 
 **This agent handles asset selection and import for Agentic Brain framework setup.**
@@ -91,15 +111,25 @@ Your job:
 
 ## Pre-Flight Memory Read
 
+**ERROR CHECK: Verify all files exist before proceeding**
+
 BEFORE doing anything else, read these files:
 1. `.github/copilot-instructions.md` - MUST load at startup
 2. `.github/agent_memory/00_index.md` - project overview
 3. `.github/agent_memory/01_decisions.md` - architectural decisions
 4. `.github/agent_memory/02_learnings.md` - learnings
-5. `PRD.md` - project requirements and tech stack
-6. `AGENTS/ACTIVE_PHASE.md` - current phase state
-7. `AGENTS/PROGRESS_DASHBOARD.md` - overall project status
-8. **`AGENTS/REQUIRED_ASSETS.md`** - REQUIRED - the list of asset categories needed
+5. `.github/agent_memory/03_actions.tsv` - action logs
+6. `.github/agent_memory/04_blockers.md` - blockers
+7. `.github/agent_memory/05_handoffs.tsv` - handoff logs
+8. `.github/agent_memory/06_memory_health.md` - memory health
+9. `PRD.md` - project requirements and tech stack
+10. `AGENTS/ACTIVE_PHASE.md` - current phase state
+11. `AGENTS/PROGRESS_DASHBOARD.md` - overall project status
+12. **`AGENTS/REQUIRED_ASSETS.md`** - REQUIRED - the list of asset categories needed
+13. `.github/agentic_brain/catalog/awesome-catalog.yaml` - asset catalog
+14. `.github/agentic_brain/catalog/required-assets.yaml` - required assets catalog
+
+**If any file is missing → TELL USER IMMEDIATELY**
 
 ---
 
@@ -112,6 +142,8 @@ First, read `AGENTS/REQUIRED_ASSETS.md` - this tells you what categories of asse
 - Required instructions
 - Required workflows
 - Required skills
+
+**ERROR CHECK:** Verify REQUIRED_ASSETS.md exists and has content
 
 ### 3.2 Analyze Project Requirements
 Read `PRD.md` and extract:
@@ -131,12 +163,16 @@ Read `PRD.md` and extract:
 - `workflows/` - Scan ALL GitHub Actions workflows
 - `skills/` - Scan ALL skills
 
+**ERROR CHECK:** Verify vendor folder exists: `ls .github/agentic_brain/vendor/awesome-copilot/`
+
 **For each required category in REQUIRED_ASSETS.md:**
 1. Search through the ENTIRE relevant folder
 2. Find files that match the category description
 3. Select the best-fit ones based on tech stack
 
 ### 3.4 Select Appropriate Assets
+
+**ERROR CHECK:** Verify at least one asset selected per category
 
 **For each category, select best-fit assets:**
 
@@ -168,6 +204,8 @@ Read `PRD.md` and extract:
 
 ### 3.5 Copy Selected Assets to Correct Locations
 
+**ERROR CHECK:** After copying EACH asset, verify it exists in destination
+
 **VSCode-mandated locations - CRITICAL:**
 
 | Asset Type | Destination |
@@ -185,11 +223,18 @@ fs.copyFileSync(
   path.join(vendorPath, "agents", "selected-agent.agent.md"),
   path.join(targetPath, ".github", "agents", "selected-agent.agent.md")
 );
+
+// ERROR CHECK after copy
+ls ".github/agents/selected-agent.agent.md"
 ```
+
+**ERROR CHECK:** Verify ALL copied files exist in correct locations BEFORE proceeding
 
 ### 3.6 Update Phase Documentation (CRITICAL - THIS IS YOUR MAIN JOB)
 
 After copying assets, you MUST fully edit and modify the phase files. Simply copying files is NOT sufficient.
+
+**ERROR CHECK:** Verify assets were copied BEFORE updating docs
 
 #### 3.6.1 Update Phase README - ADD DETAILED TASKS AND AGENT ASSIGNMENTS
 
@@ -227,6 +272,8 @@ Also update these sections in README:
 - **Technical & Design Focus** - Based on tech stack from PRD
 - **Exit Criteria** - Set actual completion conditions
 - **Validation Commands** - Add real commands (e.g., `npm run build`, `npm test`)
+
+**ERROR CHECK:** After updating README, verify tasks are present: `cat AGENTS/Phase*/README.md | Select-String "Task"`
 
 #### 3.6.2 Update Phase CHECKLIST - CREATE ACTUAL TASK CHECKLIST ITEMS
 
@@ -296,6 +343,8 @@ Update these sections with actual values:
 
 3. **Milestone History** - Add new entry:
    - `<YYYY-MM-DD>: Phase 3 complete - <N> agents, <M> hooks, <K> workflows curated from awesome-copilot`
+
+**ERROR CHECK:** After updating, verify counts present: `cat AGENTS/PROGRESS_DASHBOARD.md | Select-String "complete"`
 
 **Example update:**
 ```markdown
@@ -377,6 +426,8 @@ Update these sections with actual values:
 ## Last Updated
 - 2026-04-16
 ```
+
+**ERROR CHECK:** After updating, verify status is completed: `cat AGENTS/ACTIVE_PHASE.md | Select-String "Status.*completed"`
 
 #### 3.6.5 Update Phase README (if different from main README)
 
