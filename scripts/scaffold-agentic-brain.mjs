@@ -378,4 +378,46 @@ const args = parseArgs(process.argv);
 const targetRoot = path.resolve(args.target || process.cwd());
 const dryRun = args.dryRun === "true" || args.dryRun === "1";
 
+// CRITICAL: Detect if we're running from inside the Agentic Brain template folder
+const currentDir = process.cwd();
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const templateRoot = path.resolve(path.join(scriptDir, ".."));
+
+// Check if current directory is inside the Agentic Brain template
+const isInsideTemplate = currentDir.toLowerCase().includes("agentic brain") || 
+                        currentDir.toLowerCase().includes("agentic-brain") ||
+                        path.basename(currentDir).toLowerCase() === "agentic brain" ||
+                        path.basename(currentDir).toLowerCase() === "agentic-brain";
+
+if (isInsideTemplate && !args.target) {
+  console.error("=============================================================");
+  console.error("WARNING: You appear to be running from inside the Agentic Brain");
+  console.error("template folder. This will NOT install Agentic Brain correctly.");
+  console.error("");
+  console.error("To install Agentic Brain into YOUR project repository:");
+  console.error("  1. Navigate to YOUR project folder (not Agentic Brain)");
+  console.error("  2. Run: node <path-to-agentic-brain>/scripts/scaffold-agentic-brain.mjs --target \"<your-project-path>\"");
+  console.error("");
+  console.error("Example:");
+  console.error("  node C:\\Users\\user\\Desktop\\Agentic Brain\\scripts\\scaffold-agentic-brain.mjs --target \"C:\\Users\\user\\Desktop\\my-project\"");
+  console.error("=============================================================");
+  process.exit(1);
+}
+
+if (isInsideTemplate && args.target) {
+  // If target is explicitly provided but it's still inside the template, warn
+  const targetBasename = path.basename(targetRoot).toLowerCase();
+  if (targetBasename.includes("agentic brain") || targetBasename.includes("agentic-brain")) {
+    console.error("=============================================================");
+    console.error("ERROR: The target path appears to be inside the Agentic Brain");
+    console.error("template folder. Agentic Brain must be installed OUTSIDE of");
+    console.error("its own folder - into your actual project repository.");
+    console.error("");
+    console.error("Provide a path to YOUR project folder, for example:");
+    console.error("  --target \"C:\\Users\\user\\Desktop\\my-chrome-extension\"");
+    console.error("=============================================================");
+    process.exit(1);
+  }
+}
+
 createScaffolding(targetRoot, dryRun);

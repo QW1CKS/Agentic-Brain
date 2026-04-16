@@ -58,10 +58,18 @@ Use natural language in a target repo, for example:
 - "Install Agentic Brain and set up memory plus required custom agents."
 
 The expected behavior is:
-1. Copilot runs repository introspection.
-2. Copilot executes the scaffolding script first to create basic folder structure.
-3. Copilot outputs instructions to switch to "Copilot Agentic Brain Installer" agent.
-4. The installer agent then curates agents, instructions, hooks based on project idea.
+1. Copilot identifies the target repository (your actual project, NOT the Agentic Brain template folder)
+2. Copilot executes the scaffolding script targeting your project folder
+3. Copilot outputs instructions to switch to "Copilot Agentic Brain Installer" agent
+4. The installer agent then curates agents, instructions, hooks based on project idea
+
+## ⚠️ Critical: Target Repository
+
+**Always install INTO your project, NOT into the Agentic Brain template folder.**
+
+- The template folder is `Agentic-Brain/` - this is just the installer
+- Your actual project is where you want Agentic Brain to run
+- Example: If your project is at `Desktop/my-chrome-extension/`, run the scaffolding there
 
 ## Two-Phase Installation Flow
 

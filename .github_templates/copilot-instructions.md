@@ -37,10 +37,13 @@ When user intent is "install Agentic Brain" or equivalent:
 Automatic trigger (chat-driven install)
 
 - When the user issues the exact phrase: "Install Agentic Brain for this repository." the Copilot assistant **must** perform the scaffolding step according to the following flow (no manual CLI steps required from the user):
-  1. Perform the Pre-Flight Memory Read (see Memory Read list below).
-  2. Run the scaffolding script: `node scripts/scaffold-agentic-brain.mjs --target "<repoRoot>"`
-  3. After scaffolding completes, tell the user to switch to "Copilot Agentic Brain Installer" agent
-  4. Provide clear instructions that the user needs to describe their project idea/need to the installer agent
+  1. **IDENTIFY THE TARGET REPOSITORY:** The target is the workspace root where the user is working, NOT the Agentic Brain template folder. For example, if the user is in `anti-private-equity-slop/`, the target is that folder - NOT `anti-private-equity-slop/Agentic-Brain/`.
+  2. Perform the Pre-Flight Memory Read (see Memory Read list below).
+  3. Run the scaffolding script with EXPLICIT target path: `node scripts/scaffold-agentic-brain.mjs --target "C:\Users\user\Desktop\<actual-project-folder>"` - YOU MUST SPECIFY THE TARGET, do not rely on default or current directory.
+  4. After scaffolding completes, tell the user to switch to "Copilot Agentic Brain Installer" agent
+  5. Provide clear instructions that the user needs to describe their project idea/need to the installer agent
+
+**CRITICAL: The scaffolding MUST go into the user's actual project repository, NOT into the Agentic Brain template folder. If you are inside the Agentic-Brain folder, navigate UP to the parent folder and use that as the target.**
 
 **IMPORTANT: The scaffolding script creates empty/placeholder folders. The actual curated agent selection happens via the "Copilot Agentic Brain Installer" agent - this is the key difference from the old flow.**
 

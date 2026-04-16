@@ -15,6 +15,15 @@
 
 Agentic Brain uses a two-phase installation to ensure proper curation of agents, instructions, and hooks based on your specific project needs.
 
+### ⚠️ CRITICAL: Where to Install
+
+**Agentic Brain must be installed INTO YOUR ACTUAL PROJECT REPOSITORY, NOT into the Agentic Brain template folder itself.**
+
+- ❌ WRONG: Running script inside `Agentic-Brain/` folder
+- ✅ CORRECT: Running script from your project folder, targeting your project
+
+For example, if your project is at `C:\Users\user\Desktop\my-chrome-extension`, you run the scaffolding there - NOT inside the Agentic-Brain folder.
+
 ### Phase 1: Scaffolding
 
 In a target repository (NOT in the Agentic Brain template folder), ask Copilot:
